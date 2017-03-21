@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.mall.ErpFormatMaterialRelationDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.ErpFormatMaterialRelation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+    <result column="format_id" property="formatId" jdbcType="BIGINT" />
+    <result column="material_id" property="materialId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date_time, update_time, status, invalid, format_id, material_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_erp_format_material_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+    <select id="getErpFormatMaterialRelation" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_erp_format_material_relation
+    where format_id = #{formatId,jdbcType=BIGINT} and material_id = #{materialId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryErpFormatMaterialRelations" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_erp_format_material_relation
+    where format_id = #{formatId,jdbcType=BIGINT}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_erp_format_material_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  
+  <delete id="deleteByFormatIdAndMaterialId" >
+    delete from tbl_erp_format_material_relation
+    where format_id = #{formatId,jdbcType=BIGINT} and material_id = #{materialId,jdbcType=BIGINT}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.ibaixiong.entity.ErpFormatMaterialRelation" >
+    insert into tbl_erp_format_material_relation (id, create_date_time, update_time, 
+      status, invalid, format_id, 
+      material_id)
+    values (#{id,jdbcType=BIGINT}, #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{invalid,jdbcType=TINYINT}, #{formatId,jdbcType=BIGINT}, 
+      #{materialId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.ErpFormatMaterialRelation" >
+    insert into tbl_erp_format_material_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+      <if test="formatId != null" >
+        format_id,
+      </if>
+      <if test="materialId != null" >
+        material_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="formatId != null" >
+        #{formatId,jdbcType=BIGINT},
+      </if>
+      <if test="materialId != null" >
+        #{materialId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.ErpFormatMaterialRelation" >
+    update tbl_erp_format_material_relation
+    <set >
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="formatId != null" >
+        format_id = #{formatId,jdbcType=BIGINT},
+      </if>
+      <if test="materialId != null" >
+        material_id = #{materialId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.ErpFormatMaterialRelation" >
+    update tbl_erp_format_material_relation
+    set create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      invalid = #{invalid,jdbcType=TINYINT},
+      format_id = #{formatId,jdbcType=BIGINT},
+      material_id = #{materialId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

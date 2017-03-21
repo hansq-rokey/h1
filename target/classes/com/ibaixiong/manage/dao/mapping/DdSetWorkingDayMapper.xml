@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.ding.DdSetWorkingDayDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.DdSetWorkingDay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="work_day" property="workDay" jdbcType="TIMESTAMP" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, work_day, create_date_time,update_time,invalid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_set_workingDay
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="shouldSendCountByYearMonth" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+     from tbl_dd_set_workingDay 
+     where YEAR(work_day)= #{year,jdbcType=VARCHAR} AND MONTH(work_day)= #{month,jdbcType=VARCHAR} order by work_day asc
+  </select>
+  <delete id="deleteByYearMonth">
+    delete from tbl_dd_set_workingDay
+    where YEAR(work_day)= #{year,jdbcType=VARCHAR} AND MONTH(work_day)= #{month,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_dd_set_workingDay
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.DdSetWorkingDay" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_dd_set_workingDay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workDay != null" >
+        work_day,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workDay != null" >
+        #{workDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.DdSetWorkingDay">
+    update tbl_dd_set_workingDay
+    <set >
+      <if test="workDay != null" >
+        work_day = #{workDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

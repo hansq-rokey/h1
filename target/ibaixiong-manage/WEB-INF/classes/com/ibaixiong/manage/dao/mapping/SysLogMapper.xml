@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.sys.SysLogDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SysLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="model_code" property="modelCode" jdbcType="VARCHAR" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="CHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <association column="admin_id" property="admin" select="com.ibaixiong.manage.dao.sys.SysAdminDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, admin_id, admin_name, type, model_code, model_name, content, ip, add_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SysLog" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="admin != null" >
+        admin_id,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="modelCode != null" >
+        model_code,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="admin != null" >
+        #{admin.id,jdbcType=INTEGER},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SysLog" >
+    update tbl_sys_log
+    <set >
+      <if test="admin != null" >
+        admin_id = #{admin.id,jdbcType=INTEGER},
+      </if>
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        model_code = #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="querySysLogList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sys_log
+    where 1=1
+    <if test="queryName != null">
+		 and admin_name = #{queryName,jdbcType=VARCHAR} 
+	</if>
+	<if test="startDate != null">
+		 and add_time &gt;= '${startDate}'
+	</if>
+	<if test="endDate != null">
+		 and add_time &lt;= '${endDate}'
+	</if>
+	<if test="adminId != null">
+		 and admin_id = #{adminId,jdbcType=BIGINT} 
+	</if>
+	order by add_time desc
+  </select>
+</mapper>

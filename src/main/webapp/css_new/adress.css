@@ -1,0 +1,30 @@
+.address-mianouter{width:918px;overflow: hidden;padding-bottom: 260px;}
+.address-mian{width: 940px;}
+.address{width: 296px;position:relative;height: 240px;*width:264px;*height:200px;margin-right:15px;border: 1px solid #dcdcdc;padding: 20px 15px;float: left;margin-top:20px; }
+.address:hover,.address .on{border: 1px solid #ff6200;}
+.address h5{width: 100%;text-align: center;padding-bottom: 20px;border-bottom: 1px solid #dcdcdc;color: #999;}
+.address p{padding-left: 30px;line-height: 30px;margin: 0;margin-top: 5px;}
+.address p.adree-name{background: url(../image/son.png) 5px 7px no-repeat;}
+.address p.adree-tele{background: url(../image/tele.png) 5px 7px no-repeat;}
+.address p.adree-address{background: url(../image/address.png) 5px 7px no-repeat;width:234px;}
+.address-edit,.address-del{padding: 0 5px;color: #666;}
+.address p.op{display:none;text-align: right;position: absolute;bottom: 0;right: 10px;}
+.address:hover p.op{display: block;}
+.address-edit:hover,.address-del:hover{color: #ff6200;}
+.address-add{}
+.editdiv-box{border: 1px solid #ff6200;height: 240px;width: 296px;position: absolute;top: -1px;left: -1px;background: #fff;padding: 20px 15px;z-index: 9999;}
+.address-add input,.address-add textarea{width: 242px;max-width: 242px;border: 1px solid #dcdcdc;height:30px;padding-left: 10px;margin-left: 15px;margin-top: 18px;}
+.address-add input.small{float: left;width: 108px;float: left;margin-top: 10px;}
+.address-add textarea{height: 70px;max-height: 70px;}
+.address-add .true{margin:18px 20px 0 65px }
+.address-add .cancel,.cancel:hover{color: #999;}
+.address.add{background: url(../image/address_add2.png) center no-repeat #f7f9fb;cursor: pointer;} 
+.address-mian .add:hover{background: url(../image/address_add.png) center no-repeat #f7f9fb;}
+.addressSelect{line-height: 30px;color: #666;}
+.addressSelect div.sele{border-bottom: 1px solid #dcdcdc; margin-left: 5px;float: left;height: 30px;color:#b8b8b8;background: url(../images_new/address_arrow.png) 93px 15px no-repeat; position: relative;}
+.addressSelect div .txt{display: block; color: #b8b8b8;font-style: normal; padding-left: 10px; cursor: pointer; width: 100px;height: 30px; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;}
+.addressSelect span{width: 55px;display: block;float: left;}
+.loc{background:#fff;display:none;width: 100px;border: 1px solid #dcdcdc;height: 300px;overflow-y:scroll;border-top:none;position: absolute;top: 30px;left: 0;z-index: 99;background: #fff;  }
+.loc li{line-height: 30px;padding-left:10px;font-size: 14px;cursor: pointer;}
+:root .loc{width: 126px\9\0;}
+.loc li:hover{color: #333;}

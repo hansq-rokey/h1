@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.mall.FreightTemplateValueAreaDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.FreightTemplateValueArea" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="template_value_id" property="templateValueId" jdbcType="BIGINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="template_id" property="templateId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, template_value_id, create_date_time, province_id, province_name, city_id, city_name,template_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_freight_template_value_area
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectByIds" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_freight_template_value_area
+    where template_id = #{templateId,jdbcType=BIGINT} and 
+    province_id = #{provinceId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryByTemplateValueId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_freight_template_value_area
+    where template_value_id = #{templateValueId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_freight_template_value_area
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="deleteByTemplateValueId">
+    delete from tbl_freight_template_value_area
+    where
+    	<if test="templateValueId != null">
+    		template_value_id = #{templateValueId,jdbcType=BIGINT}
+    	</if>
+    	<if test="cityId != null" >
+        	and city_id = #{cityId,jdbcType=BIGINT}
+      	</if>
+  </delete>
+  
+  <delete id="deleteByTemplateId" parameterType="java.lang.Long" >
+    delete from tbl_freight_template_value_area
+    where template_id = #{templateId,jdbcType=BIGINT} 
+  </delete>
+  
+  <insert id="insert" parameterType="com.ibaixiong.entity.FreightTemplateValueArea" >
+    insert into tbl_freight_template_value_area (id, template_value_id, create_date_time, 
+      province_id, province_name, city_id, 
+      city_name,template_id)
+    values (#{id,jdbcType=BIGINT}, #{templateValueId,jdbcType=BIGINT}, #{createDateTime,jdbcType=TIMESTAMP}, 
+      #{provinceId,jdbcType=BIGINT}, #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT}, 
+      #{cityName,jdbcType=VARCHAR}, #{templateId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.FreightTemplateValueArea" >
+    insert into tbl_freight_template_value_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="templateValueId != null" >
+        template_value_id,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="templateValueId != null" >
+        #{templateValueId,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.FreightTemplateValueArea" >
+    update tbl_freight_template_value_area
+    <set >
+      <if test="templateValueId != null" >
+        template_value_id = #{templateValueId,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.FreightTemplateValueArea" >
+    update tbl_freight_template_value_area
+    set template_value_id = #{templateValueId,jdbcType=BIGINT},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      template_id = #{templateId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

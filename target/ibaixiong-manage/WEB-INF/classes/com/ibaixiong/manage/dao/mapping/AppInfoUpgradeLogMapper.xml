@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.app.AppInfoUpgradeLogDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.AppInfoUpgradeLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_info_id" property="appInfoId" jdbcType="BIGINT" />
+    <result column="app_chinese_name" property="appChineseName" jdbcType="VARCHAR" />
+    <result column="app_abbreviation" property="appAbbreviation" jdbcType="VARCHAR" />
+    <result column="app_version_name" property="appVersionName" jdbcType="VARCHAR" />
+    <result column="app_version_code" property="appVersionCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="install_url" property="installUrl" jdbcType="VARCHAR" />
+    <result column="app_size" property="appSize" jdbcType="BIGINT" />
+    <result column="auto_update" property="autoUpdate" jdbcType="TINYINT" />
+    <result column="app_download_name" property="appDownloadName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ibaixiong.entity.AppInfoUpgradeLog" extends="BaseResultMap" >
+    <result column="upgrade_log" property="upgradeLog" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, app_info_id, app_chinese_name, app_abbreviation, app_version_name, app_version_code, 
+    create_time, install_url, app_size, auto_update, app_download_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    upgrade_log
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_app_info_upgrade_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="queryAppInfoUpgradeLogs" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_app_info_upgrade_log
+    where app_abbreviation = #{name,jdbcType=VARCHAR} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_app_info_upgrade_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.AppInfoUpgradeLog" >
+    insert into tbl_app_info_upgrade_log (id, app_info_id, app_chinese_name, 
+      app_abbreviation, app_version_name, app_version_code, 
+      create_time, install_url, app_size, 
+      auto_update, app_download_name, upgrade_log
+      )
+    values (#{id,jdbcType=BIGINT}, #{appInfoId,jdbcType=BIGINT}, #{appChineseName,jdbcType=VARCHAR}, 
+      #{appAbbreviation,jdbcType=VARCHAR}, #{appVersionName,jdbcType=VARCHAR}, #{appVersionCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{installUrl,jdbcType=VARCHAR}, #{appSize,jdbcType=BIGINT}, 
+      #{autoUpdate,jdbcType=TINYINT}, #{appDownloadName,jdbcType=VARCHAR}, #{upgradeLog,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.AppInfoUpgradeLog" >
+    insert into tbl_app_info_upgrade_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appInfoId != null" >
+        app_info_id,
+      </if>
+      <if test="appChineseName != null" >
+        app_chinese_name,
+      </if>
+      <if test="appAbbreviation != null" >
+        app_abbreviation,
+      </if>
+      <if test="appVersionName != null" >
+        app_version_name,
+      </if>
+      <if test="appVersionCode != null" >
+        app_version_code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="installUrl != null" >
+        install_url,
+      </if>
+      <if test="appSize != null" >
+        app_size,
+      </if>
+      <if test="autoUpdate != null" >
+        auto_update,
+      </if>
+      <if test="appDownloadName != null" >
+        app_download_name,
+      </if>
+      <if test="upgradeLog != null" >
+        upgrade_log,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appInfoId != null" >
+        #{appInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="appChineseName != null" >
+        #{appChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="appAbbreviation != null" >
+        #{appAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersionName != null" >
+        #{appVersionName,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersionCode != null" >
+        #{appVersionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="installUrl != null" >
+        #{installUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appSize != null" >
+        #{appSize,jdbcType=BIGINT},
+      </if>
+      <if test="autoUpdate != null" >
+        #{autoUpdate,jdbcType=TINYINT},
+      </if>
+      <if test="appDownloadName != null" >
+        #{appDownloadName,jdbcType=VARCHAR},
+      </if>
+      <if test="upgradeLog != null" >
+        #{upgradeLog,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.AppInfoUpgradeLog" >
+    update tbl_app_info_upgrade_log
+    <set >
+      <if test="appInfoId != null" >
+        app_info_id = #{appInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="appChineseName != null" >
+        app_chinese_name = #{appChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="appAbbreviation != null" >
+        app_abbreviation = #{appAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersionName != null" >
+        app_version_name = #{appVersionName,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersionCode != null" >
+        app_version_code = #{appVersionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="installUrl != null" >
+        install_url = #{installUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appSize != null" >
+        app_size = #{appSize,jdbcType=BIGINT},
+      </if>
+      <if test="autoUpdate != null" >
+        auto_update = #{autoUpdate,jdbcType=TINYINT},
+      </if>
+      <if test="appDownloadName != null" >
+        app_download_name = #{appDownloadName,jdbcType=VARCHAR},
+      </if>
+      <if test="upgradeLog != null" >
+        upgrade_log = #{upgradeLog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ibaixiong.entity.AppInfoUpgradeLog" >
+    update tbl_app_info_upgrade_log
+    set app_info_id = #{appInfoId,jdbcType=BIGINT},
+      app_chinese_name = #{appChineseName,jdbcType=VARCHAR},
+      app_abbreviation = #{appAbbreviation,jdbcType=VARCHAR},
+      app_version_name = #{appVersionName,jdbcType=VARCHAR},
+      app_version_code = #{appVersionCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      install_url = #{installUrl,jdbcType=VARCHAR},
+      app_size = #{appSize,jdbcType=BIGINT},
+      auto_update = #{autoUpdate,jdbcType=TINYINT},
+      app_download_name = #{appDownloadName,jdbcType=VARCHAR},
+      upgrade_log = #{upgradeLog,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.AppInfoUpgradeLog" >
+    update tbl_app_info_upgrade_log
+    set app_info_id = #{appInfoId,jdbcType=BIGINT},
+      app_chinese_name = #{appChineseName,jdbcType=VARCHAR},
+      app_abbreviation = #{appAbbreviation,jdbcType=VARCHAR},
+      app_version_name = #{appVersionName,jdbcType=VARCHAR},
+      app_version_code = #{appVersionCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      install_url = #{installUrl,jdbcType=VARCHAR},
+      app_size = #{appSize,jdbcType=BIGINT},
+      auto_update = #{autoUpdate,jdbcType=TINYINT},
+      app_download_name = #{appDownloadName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

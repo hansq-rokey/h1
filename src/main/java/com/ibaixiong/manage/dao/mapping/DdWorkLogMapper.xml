@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.ding.DdWorkLogDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.DdWorkLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="admin_id" property="adminId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="REAL" />
+    <result column="work" property="work" jdbcType="VARCHAR" />
+    <result column="after_work" property="afterWork" jdbcType="VARCHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, admin_id, user_name, avatar, grade, work, after_work, create_date_time, 
+    update_time, status, invalid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_work_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <!-- 获取查询日志列表 -->
+  <select id="getListByQueryType" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_work_log
+    where 
+    	<if test="type == 1" >
+        	user_id = #{userId,jdbcType=VARCHAR}
+     	</if>
+     	<if test="type == 2" >
+        	admin_id = #{userId,jdbcType=VARCHAR}
+     	</if>
+     	order by create_date_time desc
+  </select>
+  <select id="getListByQueryTypeAndYM" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_work_log
+    where 
+    	<if test="type == 1" >
+        	user_id = #{userId,jdbcType=VARCHAR}
+     	</if>
+     	<if test="type == 2" >
+        	admin_id = #{userId,jdbcType=VARCHAR}
+     	</if>
+     	and YEAR(create_date_time)= #{year,jdbcType=VARCHAR} AND MONTH(create_date_time)= #{month,jdbcType=VARCHAR}
+     	order by create_date_time desc
+  </select>
+  <select id="getTodayLog" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_work_log
+    where user_id= #{userId} and create_date_time &gt;= '${startDate}' and create_date_time &lt;= '${endDate}'
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_dd_work_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.DdWorkLog" >
+    insert into tbl_dd_work_log (id, user_id, admin_id, 
+      user_name, avatar, grade, 
+      work, after_work, create_date_time, 
+      update_time, status, invalid
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{adminId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{grade,jdbcType=REAL}, 
+      #{work,jdbcType=VARCHAR}, #{afterWork,jdbcType=VARCHAR}, #{createDateTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{invalid,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.DdWorkLog" >
+    insert into tbl_dd_work_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="work != null" >
+        work,
+      </if>
+      <if test="afterWork != null" >
+        after_work,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=REAL},
+      </if>
+      <if test="work != null" >
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="afterWork != null" >
+        #{afterWork,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.DdWorkLog" >
+    update tbl_dd_work_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=REAL},
+      </if>
+      <if test="work != null" >
+        work = #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="afterWork != null" >
+        after_work = #{afterWork,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.DdWorkLog" >
+    update tbl_dd_work_log
+    set user_id = #{userId,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=REAL},
+      work = #{work,jdbcType=VARCHAR},
+      after_work = #{afterWork,jdbcType=VARCHAR},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      invalid = #{invalid,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

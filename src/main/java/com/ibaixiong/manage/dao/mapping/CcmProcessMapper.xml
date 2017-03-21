@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.ccm.CcmProcessDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.CcmProcess" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <association column="questions_id" property="question" select="com.ibaixiong.manage.dao.ccm.CcmQuestionDao.selectByPrimaryKey"/>
+    <association column="admin_id" property="admin" select="com.ibaixiong.manage.dao.sys.SysAdminDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, questions_id, admin_id, memo, create_date_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ccm_process
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="queryProcessByAdminId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ccm_process
+    where admin_id = #{adminId,jdbcType=BIGINT}
+  </select>
+  <select id="queryProcessByQuestionId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ccm_process
+    where questions_id = #{questionId,jdbcType=BIGINT} and memo is not null
+  </select>
+  <select id="getProcessByQidAndLid" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ccm_process
+    where questions_id = #{questionId} and admin_id = #{adminId}  and memo is null
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_ccm_process
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.CcmProcess" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_ccm_process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="question != null" >
+        questions_id,
+      </if>
+      <if test="admin != null" >
+        admin_id,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="question != null" >
+        #{question.id,jdbcType=BIGINT},
+      </if>
+      <if test="admin != null" >
+        #{admin.id,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.CcmProcess">
+    update tbl_ccm_process
+    <set >
+      <if test="question != null" >
+        questions_id = #{question.id,jdbcType=BIGINT},
+      </if>
+      <if test="admin != null" >
+        admin_id = #{admin.id,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

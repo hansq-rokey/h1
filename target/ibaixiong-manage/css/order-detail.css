@@ -1,0 +1,114 @@
+.content span{
+	font-size: 16px;
+}
+.content{
+    margin-top: 20px;
+    margin-bottom: 35px;
+    color: #aeaeae;	
+}
+.text{
+	margin-right: 50px;
+	color: black;
+}
+table{
+	width: 100%;
+    border-collapse: collapse;
+    margin-top:13px;
+}
+table tr td{
+	border:1px solid #dfdfdf;
+    height:39px;
+    text-align: center;
+    padding-left:5px;
+    padding-right: 5px;
+}
+table thead{
+	background:#fafafa;
+    color:#999999;
+}
+tbody{
+    color:#666;
+}
+tbody tr td{
+    height:40px;
+}
+.route ul li{
+	float: left;
+	margin-right: 25px;
+	width: 150px;
+	text-align: center;
+	color: #aeaeae;
+	padding-bottom:8px;
+	height: 50px;
+}
+.route ul{
+	border-bottom: 5px solid #aeaeae;
+	height: 50px;
+	width: 875px;
+	margin-bottom: 10px;
+}
+.route ul li.orange{
+	border-bottom: 5px solid #ff6200;
+	color: #ff6200;
+}
+.time{
+	margin-left: 25px;
+	margin-right: 45px;
+}
+.yellow{
+	color:#ff6200;
+}
+.foot-box{
+	margin-top:30px;
+}
+.foot-box p{
+	text-align: right;
+}
+.type-name,.type-value{
+	width: 80px;
+	display:inline-block;
+	line-height:20px;
+	font-size:12px;
+	text-align:left;
+}
+.type-name{
+	width:60px;
+}
+.change{
+	margin-left: 7px;
+	height: 45px;
+	margin-top:8px;
+	text-align:center;
+	display:inline-block;
+}
+.minusbtn,.plusbtn{
+	border-radius:50% ;
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	margin-right:10px ;
+	background-image:url(../images/add_miuns_btn.png);
+	cursor:pointer;
+	float: left;
+}
+.minusbtn{
+	background-position:-36px 0;
+}
+.minusbtn:hover{
+	background-position:-36px -36px;
+}
+.plusbtn{
+	background-position:0px 0;
+}
+.plusbtn:hover{
+	background-position:0px -36px;
+}
+input.number{
+	width: 40px;
+	height: 36px;
+	vertical-align: middle;
+	margin-right:10px ;
+	text-align: center;
+	font-size: 16px;
+	float: left;
+}

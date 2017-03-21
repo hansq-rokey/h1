@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.drp.DrpAccountDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.DrpAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="balance" property="balance" jdbcType="REAL" />
+    <result column="yestoday_profit" property="yestodayProfit" jdbcType="REAL" />
+    <result column="total_profit" property="totalProfit" jdbcType="REAL" />
+    <result column="could_take_cash" property="couldTakeCash" jdbcType="REAL" />
+    <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="alipay_name" property="alipayName" jdbcType="VARCHAR" />
+    <result column="alipay_cn_name" property="alipayCnName" jdbcType="VARCHAR" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, balance, yestoday_profit, total_profit, could_take_cash, user_real_name, 
+    user_phone, alipay_name, alipay_cn_name, invalid, status, create_date_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user_drp_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  	<select id="getDrpAccountByUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_user_drp_account
+		where user_id = #{userId,jdbcType=BIGINT}
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_user_drp_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.DrpAccount" >
+    insert into tbl_user_drp_account (id, user_id, balance, 
+      yestoday_profit, total_profit, could_take_cash, 
+      user_real_name, user_phone, alipay_name, 
+      alipay_cn_name, invalid, status, 
+      create_date_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{balance,jdbcType=REAL}, 
+      #{yestodayProfit,jdbcType=REAL}, #{totalProfit,jdbcType=REAL}, #{couldTakeCash,jdbcType=REAL}, 
+      #{userRealName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{alipayName,jdbcType=VARCHAR}, 
+      #{alipayCnName,jdbcType=VARCHAR}, #{invalid,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.DrpAccount" >
+    insert into tbl_user_drp_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="yestodayProfit != null" >
+        yestoday_profit,
+      </if>
+      <if test="totalProfit != null" >
+        total_profit,
+      </if>
+      <if test="couldTakeCash != null" >
+        could_take_cash,
+      </if>
+      <if test="userRealName != null" >
+        user_real_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="alipayName != null" >
+        alipay_name,
+      </if>
+      <if test="alipayCnName != null" >
+        alipay_cn_name,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=REAL},
+      </if>
+      <if test="yestodayProfit != null" >
+        #{yestodayProfit,jdbcType=REAL},
+      </if>
+      <if test="totalProfit != null" >
+        #{totalProfit,jdbcType=REAL},
+      </if>
+      <if test="couldTakeCash != null" >
+        #{couldTakeCash,jdbcType=REAL},
+      </if>
+      <if test="userRealName != null" >
+        #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayName != null" >
+        #{alipayName,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayCnName != null" >
+        #{alipayCnName,jdbcType=VARCHAR},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.DrpAccount" >
+    update tbl_user_drp_account
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=REAL},
+      </if>
+      <if test="yestodayProfit != null" >
+        yestoday_profit = #{yestodayProfit,jdbcType=REAL},
+      </if>
+      <if test="totalProfit != null" >
+        total_profit = #{totalProfit,jdbcType=REAL},
+      </if>
+      <if test="couldTakeCash != null" >
+        could_take_cash = #{couldTakeCash,jdbcType=REAL},
+      </if>
+      <if test="userRealName != null" >
+        user_real_name = #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayName != null" >
+        alipay_name = #{alipayName,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayCnName != null" >
+        alipay_cn_name = #{alipayCnName,jdbcType=VARCHAR},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.DrpAccount" >
+    update tbl_user_drp_account
+    set user_id = #{userId,jdbcType=BIGINT},
+      balance = #{balance,jdbcType=REAL},
+      yestoday_profit = #{yestodayProfit,jdbcType=REAL},
+      total_profit = #{totalProfit,jdbcType=REAL},
+      could_take_cash = #{couldTakeCash,jdbcType=REAL},
+      user_real_name = #{userRealName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      alipay_name = #{alipayName,jdbcType=VARCHAR},
+      alipay_cn_name = #{alipayCnName,jdbcType=VARCHAR},
+      invalid = #{invalid,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateAccountAlipay">
+    update tbl_user_drp_account
+    set user_real_name = #{userRealName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      alipay_name = #{alipayName,jdbcType=VARCHAR},
+      alipay_cn_name = #{alipayCnName,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

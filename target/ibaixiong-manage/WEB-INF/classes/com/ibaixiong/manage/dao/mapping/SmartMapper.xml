@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartDao">
+	<resultMap id="BaseResultMap" type="com.ibaixiong.entity.Smart">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bxid_token" property="bxidToken" jdbcType="CHAR" />
+		<result column="bxcode" property="bxcode" jdbcType="CHAR" />
+		<result column="bxid" property="bxid" jdbcType="CHAR" />
+		<result column="nick" property="nick" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+		<result column="reg_ip" property="regIp" jdbcType="CHAR" />
+		<result column="online_ip" property="onlineIp" jdbcType="CHAR" />
+		<result column="boot_shutdown_status" property="bootShutdownStatus"	jdbcType="TINYINT" />
+		<result column="set_temperature" property="setTemperature" jdbcType="TINYINT" />
+		<result column="room_in_temperature" property="roomInTemperature" jdbcType="TINYINT" />
+		<result column="room_in_rh" property="roomInRh" jdbcType="TINYINT" />
+		<result column="screen_light_status" property="screenLightStatus" jdbcType="TINYINT" />
+		<result column="power" property="power" jdbcType="INTEGER" />
+		<result column="is_online" property="isOnline" jdbcType="TINYINT" />
+		<result column="c_version" property="cVersion" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<association column="bxid" property="erpHardwareProduct" select="com.ibaixiong.manage.dao.smart.ErpHardwareProductDao.getErpHardwareProductByMacNumber"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, bxid, bxid_token, bxcode, nick,
+		product_name,reg_time,
+		reg_ip,online_ip,
+		boot_shutdown_status,
+		set_temperature,
+		room_in_temperature,
+		room_in_rh,
+		screen_light_status,
+		power, is_online,
+		c_version, status
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="getSmart" resultMap="QueryNotUpgrade"	parameterType="java.lang.Integer">
+		SELECT
+			s.id,
+			s.bxid,
+			s.bxcode,
+			s.product_name,
+			s.reg_time,
+			s.set_temperature,
+			s.room_in_temperature,
+			s.room_in_rh,
+			s.power,
+			s.is_online,
+			s.c_version,
+			sm.user_id
+		FROM
+			tbl_smart s
+		LEFT JOIN tbl_smart_user sm ON s.bxid = sm.bxid
+		WHERE
+		s.id = #{id,jdbcType=INTEGER}
+		AND sm.`status` = 1
+		AND sm.is_admin = 1
+	</select>
+	<select id="selectSmartByBxcode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart
+		where bxcode = #{bxcode,jdbcType=CHAR}
+	</select>
+	<select id="selectSmartByBxidAndBxidToken" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart
+		where bxid = #{bxid,jdbcType=CHAR} and 
+		bxid_token= #{bxidToken,jdbcType=CHAR}
+	</select>
+	<select id="selectSmartNumByOnline" resultType="int"
+		parameterType="java.lang.Byte">
+		select count(0)
+		from tbl_smart
+		where is_online = #{isOnline,jdbcType=TINYINT} and status = 1
+	</select>
+	
+	<!-- 列表start -->
+	<resultMap id="OnlineResultMap" type="com.ibaixiong.entity.Smart">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bxid_token" property="bxidToken" jdbcType="CHAR" />
+		<result column="bxcode" property="bxcode" jdbcType="CHAR" />
+		<result column="bxid" property="bxid" jdbcType="CHAR" />
+		<result column="nick" property="nick" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+		<result column="reg_ip" property="regIp" jdbcType="CHAR" />
+		<result column="online_ip" property="onlineIp" jdbcType="CHAR" />
+		<result column="boot_shutdown_status" property="bootShutdownStatus"	jdbcType="TINYINT" />
+		<result column="set_temperature" property="setTemperature" jdbcType="TINYINT" />
+		<result column="room_in_temperature" property="roomInTemperature" jdbcType="TINYINT" />
+		<result column="room_in_rh" property="roomInRh" jdbcType="TINYINT" />
+		<result column="screen_light_status" property="screenLightStatus" jdbcType="TINYINT" />
+		<result column="power" property="power" jdbcType="INTEGER" />
+		<result column="is_online" property="isOnline" jdbcType="TINYINT" />
+		<result column="c_version" property="cVersion" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+	</resultMap>
+	
+	<resultMap type="com.ibaixiong.entity.Smart" id="QueryNotUpgrade" extends="OnlineResultMap">
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="queryNotUpgradeSmartByOnline" resultMap="OnlineResultMap" parameterType="java.lang.Byte">
+		SELECT
+			s.id,
+			s.bxid,
+			s.bxcode,
+			s.product_name,
+			s.reg_time,
+			s.set_temperature,
+			s.room_in_temperature,
+			s.room_in_rh,
+			s.power,
+			s.is_online,
+			s.c_version,
+			sm.user_id
+		FROM
+			tbl_smart s
+		LEFT JOIN tbl_smart_user sm ON s.bxid = sm.bxid
+		WHERE
+			s.is_online = #{isOnline,jdbcType=TINYINT}
+		AND s.`status` = 1
+		<if test="startDate!=null">
+			and reg_time &gt; #{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			and reg_time &lt; #{endDate,jdbcType=TIMESTAMP}
+		</if>		
+		AND sm.`status` = 1
+		AND sm.is_admin = 1
+		AND s.bxid NOT IN (
+			SELECT DISTINCT
+				bxid
+			FROM
+				tbl_smart_upgrade_log
+			WHERE
+				type = #{type,jdbcType=SMALLINT}
+			AND invalid = 0
+		)
+	</select>
+	
+	<select id="querySmartByOnline" resultMap="OnlineResultMap" parameterType="java.lang.Byte">
+		SELECT
+			s.id, 
+			s.bxid, 
+			s.bxcode, 
+			s.product_name,
+			s.reg_time,
+			s.set_temperature,
+			s.room_in_temperature,
+			s.room_in_rh,
+			s.power, 
+			s.is_online,
+			s.c_version
+		FROM
+			tbl_smart s
+		WHERE
+			is_online = #{isOnline,jdbcType=TINYINT} 
+			and status = 1 
+	</select>
+	
+	<select id="querySmartByMap" resultMap="OnlineResultMap">
+		SELECT
+			s.id, 
+			s.bxid, 
+			s.bxcode, 
+			s.product_name,
+			s.reg_time,
+			s.set_temperature,
+			s.room_in_temperature,
+			s.room_in_rh,
+			s.power, 
+			s.is_online,
+			s.c_version
+		FROM
+			tbl_smart s
+		where
+			s.status = 1
+			<if test="isOnline!=null">
+				and s.is_online = #{isOnline,jdbcType=TINYINT} 
+			</if>
+			<if test="keywords!=null and keywords!=''">
+				and s.bxid like concat('%',#{keywords},'%')
+			</if>
+	</select>
+	
+	<select id="getListSmart" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart
+		where status = 1 
+		order by id desc
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tbl_smart
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ibaixiong.entity.Smart"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_smart (id,
+		bxid,bxid_token,bxcode,nick,
+		reg_time,
+		reg_ip,online_ip,boot_shutdown_status,
+		set_temperature,
+		room_in_temperature,
+		room_in_rh,
+		screen_light_status,
+		power, is_online,
+		c_version, status)
+		values (#{id,jdbcType=INTEGER},
+		#{bxid,jdbcType=CHAR},
+		#{bxidToken,jdbcType=CHAR},
+		#{bxcode,jdbcType=CHAR},
+		#{nick,jdbcType=VARCHAR},
+		#{regTime,jdbcType=TIMESTAMP},
+		#{regIp,jdbcType=CHAR},
+		#{onlineIp,jdbcType=CHAR},
+		#{bootShutdownStatus,jdbcType=TINYINT},
+		#{setTemperature,jdbcType=TINYINT},
+		#{roomInTemperature,jdbcType=TINYINT},
+		#{roomInRh,jdbcType=TINYINT},
+		#{screenLightStatus,jdbcType=TINYINT},
+		#{power,jdbcType=INTEGER},
+		#{isOnline,jdbcType=TINYINT},
+		#{cVersion,jdbcType=VARCHAR},
+		#{status,jdbcType=TINYINT})
+	</insert>
+	<update id="updateById" parameterType="com.ibaixiong.entity.Smart">
+		update tbl_smart
+		<set>
+			<if test="bxid != null">
+				bxid = #{bxid,jdbcType=CHAR},
+			</if>
+			<if test="bxidToken != null">
+				bxid_token = #{bxidToken,jdbcType=CHAR},
+			</if>
+			<if test="bxcode != null">
+				bxcode = #{bxcode,jdbcType=CHAR},
+			</if>
+			<if test="nick != null">
+				nick = #{nick,jdbcType=VARCHAR},
+			</if>
+			<if test="regTime != null">
+				reg_time = #{regTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="regIp != null">
+				reg_ip = #{regIp,jdbcType=CHAR},
+			</if>
+			<if test="onlineIp != null">
+				online_ip = #{onlineIp,jdbcType=CHAR},
+			</if>
+			<if test="bootShutdownStatus != null">
+				boot_shutdown_status =
+				#{bootShutdownStatus,jdbcType=TINYINT},
+			</if>
+			<if test="setTemperature != null">
+				set_temperature = #{setTemperature,jdbcType=TINYINT},
+			</if>
+			<if test="roomInTemperature != null">
+				room_in_temperature =
+				#{roomInTemperature,jdbcType=TINYINT},
+			</if>
+			<if test="roomInRh != null">
+				room_in_rh = #{roomInRh,jdbcType=TINYINT},
+			</if>
+			<if test="screenLightStatus != null">
+				screen_light_status =
+				#{screenLightStatus,jdbcType=TINYINT},
+			</if>
+			<if test="power != null">
+				power = #{power,jdbcType=INTEGER},
+			</if>
+			<if test="isOnline != null">
+				is_online = #{isOnline,jdbcType=TINYINT},
+			</if>
+			<if test="cVersion != null">
+				c_version = #{cVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByBxcode" parameterType="com.ibaixiong.entity.Smart">
+		update tbl_smart
+		<set>
+			<if test="bxid != null">
+				bxid = #{bxid,jdbcType=CHAR},
+			</if>
+			<if test="bxidToken != null">
+				bxid_token = #{bxidToken,jdbcType=CHAR},
+			</if>
+			<if test="bxcode != null">
+				bxcode = #{bxcode,jdbcType=CHAR},
+			</if>
+			<if test="nick != null">
+				nick = #{nick,jdbcType=VARCHAR},
+			</if>
+			<if test="regTime != null">
+				reg_time = #{regTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="regIp != null">
+				reg_ip = #{regIp,jdbcType=CHAR},
+			</if>
+			<if test="onlineIp != null">
+				online_ip = #{onlineIp,jdbcType=CHAR},
+			</if>
+			<if test="bootShutdownStatus != null">
+				boot_shutdown_status =
+				#{bootShutdownStatus,jdbcType=TINYINT},
+			</if>
+			<if test="setTemperature != null">
+				set_temperature = #{setTemperature,jdbcType=TINYINT},
+			</if>
+			<if test="roomInTemperature != null">
+				room_in_temperature =
+				#{roomInTemperature,jdbcType=TINYINT},
+			</if>
+			<if test="roomInRh != null">
+				room_in_rh = #{roomInRh,jdbcType=TINYINT},
+			</if>
+			<if test="screenLightStatus != null">
+				screen_light_status =
+				#{screenLightStatus,jdbcType=TINYINT},
+			</if>
+			<if test="power != null">
+				power = #{power,jdbcType=INTEGER},
+			</if>
+			<if test="isOnline != null">
+				is_online = #{isOnline,jdbcType=TINYINT},
+			</if>
+			<if test="cVersion != null">
+				c_version = #{cVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+		</set>
+		where bxcode = #{bxcode,jdbcType=VARCHAR}
+	</update>
+</mapper>

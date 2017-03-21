@@ -1,0 +1,71 @@
+A:visited {
+	color: black
+}
+
+A:hover {
+	color: red
+}
+th {
+	background: #0066FF;
+	color: #ffffff
+}
+
+.even {
+	background: #CCFFCC;
+}
+
+.odd {
+	background: #ffffff;
+}
+
+.over {
+	background: #CCFFCC;
+}
+
+.click {
+	background: Aqua;
+}
+
+.DateSelect table{
+    width: 100%;
+    margin-top: 1%;
+    margin-left: 1%;
+    text-align: left;
+}
+.DateSelect table td{
+    word-break: keep-all;
+    white-space:nowrap ;
+}
+.DateSelect table input{
+    width:43%;
+    vertical-align: middle;
+    border:1px solid #bcbcbc ;
+    height: 20px;
+}
+.tab_Select_Num{
+    border-collapse:collapse;
+    background-color: #e1eafe;
+}
+.footer_button_location{
+    text-align: center;
+}
+.tab_Select_Num td{
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: blue;
+    border: 1px solid #b4cede;
+}
+.tr_bg{
+    background: url(../images/EvidenceSR/EvidenceSR_26.gif);
+    background-repeat: repeat-x;
+    height: 29px;
+    vertical-align: middle;
+    text-align: center;
+    color: #000;
+}
+.right_content{
+    width: 100%;
+    float: left;
+    font-size:12px;
+}

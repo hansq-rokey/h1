@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.mall.FreightTemplateValueDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.FreightTemplateValue" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="template_id" property="templateId" jdbcType="BIGINT" />
+    <result column="valuation_type" property="valuationType" jdbcType="TINYINT" />
+    <result column="num_inner" property="numInner" jdbcType="REAL" />
+    <result column="price_inner" property="priceInner" jdbcType="REAL" />
+    <result column="num_out" property="numOut" jdbcType="REAL" />
+    <result column="price_out" property="priceOut" jdbcType="REAL" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <!-- <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="town_id" property="townId" jdbcType="BIGINT" />
+    <result column="town_name" property="townName" jdbcType="VARCHAR" /> -->
+    <result column="update_date_time" property="updateDateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, template_id, valuation_type, num_inner, price_inner, num_out, price_out, unit, 
+    create_date_time, update_date_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_freight_template_value
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryByTemplateId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_freight_template_value
+    where template_id = #{templateId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_freight_template_value
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="deleteByTemplateId" parameterType="java.lang.Long" >
+    delete from tbl_freight_template_value
+    where template_id = #{templateId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.ibaixiong.entity.FreightTemplateValue" keyProperty="id" useGeneratedKeys="true">
+    insert into tbl_freight_template_value (id, template_id, valuation_type, 
+      num_inner, price_inner, num_out, 
+      price_out, unit, create_date_time,update_date_time)
+    values (#{id,jdbcType=BIGINT}, #{templateId,jdbcType=BIGINT}, #{valuationType,jdbcType=TINYINT}, 
+      #{numInner,jdbcType=REAL}, #{priceInner,jdbcType=REAL}, #{numOut,jdbcType=REAL}, 
+      #{priceOut,jdbcType=REAL}, #{unit,jdbcType=VARCHAR}, #{createDateTime,jdbcType=TIMESTAMP}, 
+      #{updateDateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.FreightTemplateValue" >
+    insert into tbl_freight_template_value
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="valuationType != null" >
+        valuation_type,
+      </if>
+      <if test="numInner != null" >
+        num_inner,
+      </if>
+      <if test="priceInner != null" >
+        price_inner,
+      </if>
+      <if test="numOut != null" >
+        num_out,
+      </if>
+      <if test="priceOut != null" >
+        price_out,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateDateTime != null" >
+        update_date_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="valuationType != null" >
+        #{valuationType,jdbcType=TINYINT},
+      </if>
+      <if test="numInner != null" >
+        #{numInner,jdbcType=REAL},
+      </if>
+      <if test="priceInner != null" >
+        #{priceInner,jdbcType=REAL},
+      </if>
+      <if test="numOut != null" >
+        #{numOut,jdbcType=REAL},
+      </if>
+      <if test="priceOut != null" >
+        #{priceOut,jdbcType=REAL},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDateTime != null" >
+        #{updateDateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.FreightTemplateValue" >
+    update tbl_freight_template_value
+    <set >
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="valuationType != null" >
+        valuation_type = #{valuationType,jdbcType=TINYINT},
+      </if>
+      <if test="numInner != null" >
+        num_inner = #{numInner,jdbcType=REAL},
+      </if>
+      <if test="priceInner != null" >
+        price_inner = #{priceInner,jdbcType=REAL},
+      </if>
+      <if test="numOut != null" >
+        num_out = #{numOut,jdbcType=REAL},
+      </if>
+      <if test="priceOut != null" >
+        price_out = #{priceOut,jdbcType=REAL},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDateTime != null" >
+        update_date_time = #{updateDateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.FreightTemplateValue" >
+    update tbl_freight_template_value
+    set template_id = #{templateId,jdbcType=BIGINT},
+      valuation_type = #{valuationType,jdbcType=TINYINT},
+      num_inner = #{numInner,jdbcType=REAL},
+      price_inner = #{priceInner,jdbcType=REAL},
+      num_out = #{numOut,jdbcType=REAL},
+      price_out = #{priceOut,jdbcType=REAL},
+      unit = #{unit,jdbcType=VARCHAR},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_date_time = #{updateDateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

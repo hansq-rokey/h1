@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.ding.DdOrgUserDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.DdOrgUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+    <association column="org_id" property="org" select="com.ibaixiong.manage.dao.ding.DdOrgDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, org_id, user_id, create_date_time, update_time, status, invalid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_org_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getByDepartmentIdAndUserId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_org_user
+    where org_id = #{departmentId,jdbcType=VARCHAR} and user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="getByUserId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_org_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+    <select id="queryOrgUsersByDepartmentId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dd_org_user
+    where org_id = #{departmentId,jdbcType=VARCHAR}
+  </select>
+  <!-- 根据部门ID删除 -->
+  <delete id="deleteByDepartmentId" parameterType="java.lang.String" >
+    delete from tbl_dd_org_user
+    where org_id = #{departmentId,jdbcType=VARCHAR}
+  </delete>
+  <!-- 根据用户ID删除 -->
+  <delete id="deleteByUserId" parameterType="java.lang.String" >
+    delete from tbl_dd_org_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_dd_org_user
+    where id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.DdOrgUser" >
+    insert into tbl_dd_org_user (id, org_id, user_id, 
+      create_date_time, update_time, status, 
+      invalid)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{invalid,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.DdOrgUser" >
+    insert into tbl_dd_org_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.DdOrgUser" >
+    update tbl_dd_org_user
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.DdOrgUser" >
+    update tbl_dd_org_user
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      invalid = #{invalid,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

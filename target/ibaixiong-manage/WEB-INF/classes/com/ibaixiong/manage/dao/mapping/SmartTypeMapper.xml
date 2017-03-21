@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartTypeDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SmartType" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+    <result column="category_code" property="categoryCode" jdbcType="CHAR" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="category_model_id" property="categoryModelId" jdbcType="BIGINT" />
+    <result column="category_model_code" property="categoryModelCode" jdbcType="CHAR" />
+    <result column="category_model_name" property="categoryModelName" jdbcType="VARCHAR" />
+    <result column="logo_img" property="logoImg" jdbcType="VARCHAR" />
+    <result column="reset_img" property="resetImg" jdbcType="VARCHAR" />
+    <result column="ready_yes_img" property="readyYesImg" jdbcType="VARCHAR" />
+    <result column="ready_no_img" property="readyNoImg" jdbcType="VARCHAR" />
+    <result column="wifi_name" property="wifiName" jdbcType="VARCHAR" />
+    <result column="wifi_password" property="wifiPassword" jdbcType="VARCHAR" />
+    <result column="wifi_host" property="wifiHost" jdbcType="CHAR" />
+    <result column="wifi_port" property="wifiPort" jdbcType="INTEGER" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="sign_key" property="signKey" jdbcType="CHAR" />
+    <result column="bxid4" property="bxid4" jdbcType="CHAR" />
+    <result column="ui" property="ui" jdbcType="VARCHAR" />
+    <result column="c_version_last" property="cVersionLast" jdbcType="VARCHAR" />
+    <result column="upgrade_bin" property="upgradeBin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, category_id, category_code, category_name, category_model_id, category_model_code, 
+    category_model_name, logo_img, reset_img, ready_yes_img, ready_no_img, wifi_name, 
+    wifi_password, wifi_host, wifi_port, create_date_time, update_time, status, sign_key, 
+    bxid4, ui, c_version_last, upgrade_bin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="listSmartTypeByStatus" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_type
+    <where>
+    <if test="status!=null">
+    	status = #{status,jdbcType=TINYINT}
+    </if>
+    </where>
+  </select>
+  
+  <select id="selectByBxid4" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_type
+    where bxid4 = #{bxid4,jdbcType=CHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_smart_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.SmartType" >
+    insert into tbl_smart_type (id, category_id, category_code, 
+      category_name, category_model_id, category_model_code, 
+      category_model_name, logo_img, reset_img, 
+      ready_yes_img, ready_no_img, wifi_name, 
+      wifi_password, wifi_host, wifi_port, 
+      create_date_time, update_time, status, 
+      sign_key, bxid4, ui, c_version_last, 
+      upgrade_bin)
+    values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{categoryCode,jdbcType=CHAR}, 
+      #{categoryName,jdbcType=VARCHAR}, #{categoryModelId,jdbcType=BIGINT}, #{categoryModelCode,jdbcType=CHAR}, 
+      #{categoryModelName,jdbcType=VARCHAR}, #{logoImg,jdbcType=VARCHAR}, #{resetImg,jdbcType=VARCHAR}, 
+      #{readyYesImg,jdbcType=VARCHAR}, #{readyNoImg,jdbcType=VARCHAR}, #{wifiName,jdbcType=VARCHAR}, 
+      #{wifiPassword,jdbcType=VARCHAR}, #{wifiHost,jdbcType=CHAR}, #{wifiPort,jdbcType=INTEGER}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{signKey,jdbcType=CHAR}, #{bxid4,jdbcType=CHAR}, #{ui,jdbcType=VARCHAR}, #{cVersionLast,jdbcType=VARCHAR}, 
+      #{upgradeBin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SmartType" >
+    insert into tbl_smart_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="categoryCode != null" >
+        category_code,
+      </if>
+      <if test="categoryName != null" >
+        category_name,
+      </if>
+      <if test="categoryModelId != null" >
+        category_model_id,
+      </if>
+      <if test="categoryModelCode != null" >
+        category_model_code,
+      </if>
+      <if test="categoryModelName != null" >
+        category_model_name,
+      </if>
+      <if test="logoImg != null" >
+        logo_img,
+      </if>
+      <if test="resetImg != null" >
+        reset_img,
+      </if>
+      <if test="readyYesImg != null" >
+        ready_yes_img,
+      </if>
+      <if test="readyNoImg != null" >
+        ready_no_img,
+      </if>
+      <if test="wifiName != null" >
+        wifi_name,
+      </if>
+      <if test="wifiPassword != null" >
+        wifi_password,
+      </if>
+      <if test="wifiHost != null" >
+        wifi_host,
+      </if>
+      <if test="wifiPort != null" >
+        wifi_port,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="signKey != null" >
+        sign_key,
+      </if>
+      <if test="bxid4 != null" >
+        bxid4,
+      </if>
+      <if test="ui != null" >
+        ui,
+      </if>
+      <if test="cVersionLast != null" >
+        c_version_last,
+      </if>
+      <if test="upgradeBin != null" >
+        upgrade_bin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryCode != null" >
+        #{categoryCode,jdbcType=CHAR},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryModelId != null" >
+        #{categoryModelId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryModelCode != null" >
+        #{categoryModelCode,jdbcType=CHAR},
+      </if>
+      <if test="categoryModelName != null" >
+        #{categoryModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="logoImg != null" >
+        #{logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="resetImg != null" >
+        #{resetImg,jdbcType=VARCHAR},
+      </if>
+      <if test="readyYesImg != null" >
+        #{readyYesImg,jdbcType=VARCHAR},
+      </if>
+      <if test="readyNoImg != null" >
+        #{readyNoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiName != null" >
+        #{wifiName,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiPassword != null" >
+        #{wifiPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiHost != null" >
+        #{wifiHost,jdbcType=CHAR},
+      </if>
+      <if test="wifiPort != null" >
+        #{wifiPort,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="signKey != null" >
+        #{signKey,jdbcType=CHAR},
+      </if>
+      <if test="bxid4 != null" >
+        #{bxid4,jdbcType=CHAR},
+      </if>
+      <if test="ui != null" >
+        #{ui,jdbcType=VARCHAR},
+      </if>
+      <if test="cVersionLast != null" >
+        #{cVersionLast,jdbcType=VARCHAR},
+      </if>
+      <if test="upgradeBin != null" >
+        #{upgradeBin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SmartType" >
+    update tbl_smart_type
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryCode != null" >
+        category_code = #{categoryCode,jdbcType=CHAR},
+      </if>
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryModelId != null" >
+        category_model_id = #{categoryModelId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryModelCode != null" >
+        category_model_code = #{categoryModelCode,jdbcType=CHAR},
+      </if>
+      <if test="categoryModelName != null" >
+        category_model_name = #{categoryModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="logoImg != null" >
+        logo_img = #{logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="resetImg != null" >
+        reset_img = #{resetImg,jdbcType=VARCHAR},
+      </if>
+      <if test="readyYesImg != null" >
+        ready_yes_img = #{readyYesImg,jdbcType=VARCHAR},
+      </if>
+      <if test="readyNoImg != null" >
+        ready_no_img = #{readyNoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiName != null" >
+        wifi_name = #{wifiName,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiPassword != null" >
+        wifi_password = #{wifiPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiHost != null" >
+        wifi_host = #{wifiHost,jdbcType=CHAR},
+      </if>
+      <if test="wifiPort != null" >
+        wifi_port = #{wifiPort,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="signKey != null" >
+        sign_key = #{signKey,jdbcType=CHAR},
+      </if>
+      <if test="bxid4 != null" >
+        bxid4 = #{bxid4,jdbcType=CHAR},
+      </if>
+      <if test="ui != null" >
+        ui = #{ui,jdbcType=VARCHAR},
+      </if>
+      <if test="cVersionLast != null" >
+        c_version_last = #{cVersionLast,jdbcType=VARCHAR},
+      </if>
+      <if test="upgradeBin != null" >
+        upgrade_bin = #{upgradeBin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.SmartType" >
+    update tbl_smart_type
+    set category_id = #{categoryId,jdbcType=BIGINT},
+      category_code = #{categoryCode,jdbcType=CHAR},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      category_model_id = #{categoryModelId,jdbcType=BIGINT},
+      category_model_code = #{categoryModelCode,jdbcType=CHAR},
+      category_model_name = #{categoryModelName,jdbcType=VARCHAR},
+      logo_img = #{logoImg,jdbcType=VARCHAR},
+      reset_img = #{resetImg,jdbcType=VARCHAR},
+      ready_yes_img = #{readyYesImg,jdbcType=VARCHAR},
+      ready_no_img = #{readyNoImg,jdbcType=VARCHAR},
+      wifi_name = #{wifiName,jdbcType=VARCHAR},
+      wifi_password = #{wifiPassword,jdbcType=VARCHAR},
+      wifi_host = #{wifiHost,jdbcType=CHAR},
+      wifi_port = #{wifiPort,jdbcType=INTEGER},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      sign_key = #{signKey,jdbcType=CHAR},
+      bxid4 = #{bxid4,jdbcType=CHAR},
+      ui = #{ui,jdbcType=VARCHAR},
+      c_version_last = #{cVersionLast,jdbcType=VARCHAR},
+      upgrade_bin = #{upgradeBin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

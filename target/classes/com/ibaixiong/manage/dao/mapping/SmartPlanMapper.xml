@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartPlanDao">
+	<resultMap id="BaseResultMap" type="com.ibaixiong.entity.SmartPlan">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bxid" property="bxid" jdbcType="CHAR" />
+		<result column="bxcode" property="bxcode" jdbcType="CHAR" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="do_time" property="doTime" jdbcType="INTEGER" />
+		<result column="set_temperature" property="setTemperature"
+			jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="create_user_id" property="createUserId"
+			jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, bxid, bxcode, type, do_time, set_temperature,
+		create_time,
+		create_user_id, status
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart_plan
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectListByBxcode" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart_plan
+		where bxcode = #{bxcode,jdbcType=CHAR} and
+		status=#{status,jdbcType=TINYINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tbl_smart_plan
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ibaixiong.entity.SmartPlan">
+		insert into tbl_smart_plan
+		(id, bxid, bxcode, type,
+		do_time, set_temperature, create_time,
+		create_user_id, status)
+		values (#{id,jdbcType=INTEGER},
+		#{bxid,jdbcType=CHAR},
+		#{bxcode,jdbcType=CHAR}, #{type,jdbcType=TINYINT},
+		#{doTime,jdbcType=INTEGER}, #{setTemperature,jdbcType=TINYINT},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=INTEGER},
+		#{status,jdbcType=TINYINT})
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SmartPlan">
+		update tbl_smart_plan
+		<set>
+			<if test="bxid != null">
+				bxid = #{bxid,jdbcType=CHAR},
+			</if>
+			<if test="bxcode != null">
+				bxcode = #{bxcode,jdbcType=CHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=TINYINT},
+			</if>
+			<if test="doTime != null">
+				do_time = #{doTime,jdbcType=INTEGER},
+			</if>
+			<if test="setTemperature != null">
+				set_temperature = #{setTemperature,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

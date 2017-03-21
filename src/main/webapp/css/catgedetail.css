@@ -1,0 +1,179 @@
+.inforbox table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top:13px;
+}
+.inforbox table thead{
+    background:#fafafa;
+    color:#999999;
+}
+.inforbox table tbody{
+    color:#666;
+}
+.inforbox table tr td{
+    border:1px solid #dfdfdf;
+    height:39px;
+    text-align: center;
+    padding:10px 0;
+}
+.catgetable tbody tr td{
+    height:40px;
+}
+input.putaway{
+    margin-left:20px;
+}
+.showicon{
+    margin:10px auto;
+    display: block;
+    float: none;
+}
+.selectinput{
+    float: none;
+    width: 182px;
+    margin: 0;
+}
+.model-list tr td:last-child{
+    text-align: left;
+    text-indent: 30px;
+}
+.model-list tr td:first-child{
+    width: 100px;
+}
+input[type=checkbox].smart-type{
+    margin-left:30px;
+    margin-right:10px;
+}
+.type-name{
+    width: 80px;
+    display: inline-block;
+}
+.type-value-box{
+    width: 160px;
+    height:190px;
+    float: left;
+    margin:10px;
+    position: relative;
+    border:1px solid #dcdcdc;
+    cursor: pointer;
+}
+input.type-value,span.type-value{
+    width: 154px;
+    height:22px;
+    border:1px solid #dcdcdc;
+    float: left;
+    margin:3px;
+    position: absolute;
+    top:0;
+    left: 0;
+    display: inline-block;
+}
+.type-update{
+    z-index: 99;
+}
+.type-file{
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+}
+.type-delete{
+    width: 24px;
+    height:24px;
+    position: absolute;
+    top:-12px;
+    right:-12px;
+    display:none;
+}
+.type-value-box:hover .type-delete{
+	display:block;
+}
+.add-type-box{
+    border:none;
+    width: 160px;
+    height:190px;
+    float: left;
+    margin:10px;
+    position: relative;
+    cursor: pointer;
+}
+.type-add{
+    position: absolute;
+    width: 160px;
+    height:190px;
+    top:0;
+    left:0;
+}
+.save-model,.edit-model,.cancel-model{
+    width: 100px;
+    height:30px;
+    color:#fff;
+    background: #ff6200;
+}
+.cancel-model{
+    color:#666;
+    background:#fff;
+}
+span.type-value{
+    border:none;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
+.uploadbox{
+    width: 60px;
+    height:60px;
+    margin:0 auto;
+}
+.uploadbox:hover .barrier{
+    display:block ;
+}
+.uploadimg,.barrier{
+    width: 60px;
+    height:60px;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 98;
+}
+.barrier{
+    background: #000;
+    opacity: 0.6;
+    color:#fff;
+    display: none;
+    z-index: 99;
+    line-height:60px;
+}
+.uploadbox{
+    position: relative;
+}
+.file,.uploadbtn{
+    width: 115px;
+    height:30px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 99;
+}
+.file{
+    opacity: 0;
+}
+.type-img,.type-update,.type-file{
+    position: absolute;
+    width: 158px;
+    height:158px;
+    bottom:0;
+    left:0;
+    z-index: 98;
+}
+.type-file{
+	top:30px;
+}
+.uploadimgbtn{
+    width: 60px;
+    height:60px;
+    background: #fff;
+    color:#666;
+    z-index: 9999;
+}

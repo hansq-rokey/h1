@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartUserDao">
+	<resultMap id="BaseResultMap" type="com.ibaixiong.entity.SmartUser">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bxid" property="bxid" jdbcType="CHAR" />
+		<result column="bxcode" property="bxcode" jdbcType="CHAR" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="bind_time" property="bindTime" jdbcType="TIMESTAMP" />
+		<result column="is_admin" property="isAdmin" jdbcType="TINYINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, bxid, bxcode, user_id, bind_time, is_admin
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart_user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectListByBxcode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart_user
+		where bxcode = #{bxcode,jdbcType=CHAR}
+	</select>
+	<select id="selectListByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart_user
+		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByBxcodeAndUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_smart_user
+		where bxcode = #{bxcode,jdbcType=CHAR} and
+		user_id=#{userId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tbl_smart_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByBxcodeAndUserId">
+		delete from
+		tbl_smart_user
+		where bxcode =
+		#{bxcode,jdbcType=CHAR} and 
+		user_id = #{userId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ibaixiong.entity.SmartUser"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_smart_user
+		(id,bxid, bxcode, user_id,bind_time, is_admin)
+		values
+		(#{id,jdbcType=INTEGER}, #{bxid,jdbcType=CHAR},
+		#{bxcode,jdbcType=CHAR}, #{userId,jdbcType=INTEGER},
+		#{bindTime,jdbcType=TIMESTAMP}, #{isAdmin,jdbcType=TINYINT})
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SmartUser">
+		update tbl_smart_user
+		<set>
+			<if test="bxid != null">
+				bxid = #{bxid,jdbcType=CHAR},
+			</if>
+			<if test="bxcode != null">
+				bxcode = #{bxcode,jdbcType=CHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="bindTime != null">
+				bind_time = #{bindTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isAdmin != null">
+				is_admin = #{isAdmin,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateIsAdminByBxcode">
+		update tbl_smart_user
+		<set>
+			is_admin = #{isAdmin,jdbcType=TINYINT},
+		</set>
+		where bxcode = #{bxcode,jdbcType=CHAR}
+	</update>
+
+</mapper>

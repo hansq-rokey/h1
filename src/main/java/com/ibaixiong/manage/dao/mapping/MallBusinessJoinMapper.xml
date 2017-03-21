@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.crm.MallBusinessJoinDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.MallBusinessJoin" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="cities" property="cities" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="CHAR" />
+    <result column="origin" property="origin" jdbcType="TINYINT" />
+    <result column="ad_type" property="adType" jdbcType="TINYINT" />
+    <result column="page_value" property="pageValue" jdbcType="VARCHAR" />
+    <result column="advert_value" property="advertValue" jdbcType="VARCHAR" />
+    <result column="invest_money" property="investMoney" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date_time, status, invalid, name, tel, cities, remark, ip,origin,ad_type,page_value,advert_value,invest_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mall_business_join
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryBusinessJoins" resultMap="BaseResultMap" parameterType="byte" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mall_business_join
+    <where>
+    	<if test="status!=null">
+    		status=#{status,jdbcType=TINYINT}
+    	</if>
+    </where>
+  </select>
+  
+  <select id="queryBusinessList" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from tbl_mall_business_join
+    <where>
+    	<if test="status!=null">
+    		status=#{status,jdbcType=TINYINT}
+    	</if>
+    	<if test="startTime!=null and endTime!=null">
+    		and create_date_time &gt; #{startTime,jdbcType=TIMESTAMP} and create_date_time  &lt; #{endTime,jdbcType=TIMESTAMP} 
+    	</if>
+    </where>
+    order by id desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_mall_business_join
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.MallBusinessJoin" >
+    insert into tbl_mall_business_join (id, create_date_time, status, 
+      invalid, name, tel, 
+      cities, remark, ip,origin,ad_type,page_value,advert_value,invest_money)
+    values (#{id,jdbcType=BIGINT}, #{createDateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{invalid,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{cities,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{ip,jdbcType=CHAR},#{origin,jdbcType=TINYINT},
+      #{adType,jdbcType=TINYINT}, #{pageValue,jdbcType=VARCHAR}, #{advertValue,jdbcType=VARCHAR}, #{investMoney,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.MallBusinessJoin" >
+    insert into tbl_mall_business_join
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="cities != null" >
+        cities,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="adType != null" >
+        ad_type,
+      </if>
+      <if test="pageValue != null" >
+        page_value,
+      </if>
+      <if test="advertValue != null" >
+        advert_value,
+      </if>
+      <if test="investMoney != null" >
+        invest_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="cities != null" >
+        #{cities,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=CHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=IINYINT},
+      </if>
+      <if test="adType != null" >
+        #{adType,jdbcType=IINYINT},
+      </if>
+      <if test="pageValue != null" >
+        #{pageValue,jdbcType=VARCHAR},
+      </if>
+      <if test="advertValue != null" >
+        #{advertValue,jdbcType=VARCHAR},
+      </if>
+      <if test="investMoney != null" >
+        #{investMoney,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.MallBusinessJoin" >
+    update tbl_mall_business_join
+    <set >
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="cities != null" >
+        cities = #{cities,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=CHAR},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=TINYINT},
+      </if>
+      <if test="adType != null" >
+        ad_type = #{adType,jdbcType=TINYINT},
+      </if>
+      <if test="pageValue != null" >
+        page_value = #{pageValue,jdbcType=VARCHAR},
+      </if>
+      <if test="advertValue != null" >
+        advert_value = #{advertValue,jdbcType=VARCHAR},
+      </if>
+      <if test="investMoney != null" >
+        invest_money = #{investMoney,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.MallBusinessJoin" >
+    update tbl_mall_business_join
+    set create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      invalid = #{invalid,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      cities = #{cities,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=CHAR},
+      origin = #{origin,jdbcType=TINYINT},
+      ad_type = #{adType,jdbcType=TINYINT},
+      page_value = #{pageValue,jdbcType=VARCHAR},
+      advert_value = #{advertValue,jdbcType=VARCHAR},
+      invest_money = #{investMoney,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

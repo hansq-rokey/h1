@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.crm.SsssGetcashDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SsssGetcash" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="invalid" property="invalid" jdbcType="TINYINT" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="ssss_id" property="ssssId" jdbcType="BIGINT" />
+    <result column="city_merchant_id" property="cityMerchantId" jdbcType="BIGINT" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_number" property="bankNumber" jdbcType="VARCHAR" />
+    <result column="bank_address" property="bankAddress" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="pay_number" property="payNumber" jdbcType="VARCHAR" />
+    <association column="user_id" property="user" select="com.ibaixiong.manage.dao.bbs.UserDao.selectByPrimaryKey"/>
+    <association column="ssss_id" property="ssssInfo" select="com.ibaixiong.manage.dao.crm.SsssInfoDao.selectByPrimaryKey"/>
+    <association column="city_merchant_id" property="cityMerchant" select="com.ibaixiong.manage.dao.crm.SsssCityMerchantDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date_time, update_time, status, invalid, admin_id, ssss_id, city_merchant_id, 
+    bank_name, bank_number, bank_address, user_id, money,pay_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ssss_getcash
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ssss_getcash order by create_date_time desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_ssss_getcash
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.SsssGetcash" >
+    insert into tbl_ssss_getcash (id, create_date_time, update_time, 
+      status, invalid, admin_id, 
+      ssss_id, city_merchant_id, bank_name, 
+      bank_number, bank_address, user_id, 
+      money)
+    values (#{id,jdbcType=BIGINT}, #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{invalid,jdbcType=TINYINT}, #{adminId,jdbcType=BIGINT}, 
+      #{ssssId,jdbcType=VARCHAR}, #{cityMerchantId,jdbcType=BIGINT}, #{bankName,jdbcType=VARCHAR}, 
+      #{bankNumber,jdbcType=VARCHAR}, #{bankAddress,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{money,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SsssGetcash" >
+    insert into tbl_ssss_getcash
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="ssssId != null" >
+        ssss_id,
+      </if>
+      <if test="cityMerchantId != null" >
+        city_merchant_id,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankNumber != null" >
+        bank_number,
+      </if>
+      <if test="bankAddress != null" >
+        bank_address,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="ssssId != null" >
+        #{ssssId,jdbcType=BIGINT},
+      </if>
+      <if test="cityMerchantId != null" >
+        #{cityMerchantId,jdbcType=BIGINT},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null" >
+        #{bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SsssGetcash" >
+    update tbl_ssss_getcash
+    <set >
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=TINYINT},
+      </if>
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="ssssId != null" >
+        ssss_id = #{ssssId,jdbcType=BIGINT},
+      </if>
+      <if test="cityMerchantId != null" >
+        city_merchant_id = #{cityMerchantId,jdbcType=BIGINT},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        bank_number = #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null" >
+        bank_address = #{bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.SsssGetcash" >
+    update tbl_ssss_getcash
+    set create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      invalid = #{invalid,jdbcType=TINYINT},
+      admin_id = #{adminId,jdbcType=BIGINT},
+      ssss_id = #{ssssId,jdbcType=VARCHAR},
+      city_merchant_id = #{cityMerchantId,jdbcType=BIGINT},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_number = #{bankNumber,jdbcType=VARCHAR},
+      bank_address = #{bankAddress,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      money = #{money,jdbcType=REAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,78 @@
+.finanstatlist{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top:13px;
+}
+.finanstatlist thead{
+    background:#fafafa;
+    color:#999999;
+}
+.finanstatlist tbody{
+    color:#666;
+}
+.finanstatlist tr td{
+    border:1px solid #dfdfdf;
+    height:40px;
+    text-align: center;
+    padding:10px 0;
+}
+.ordercodebtn{
+    width: 254px;
+    height:30px;
+    margin-right:20px;
+    border:1px solid #dcdcdc;
+}
+.datetimepicker{
+    width: 140px;
+    height:30px;
+    border:1px solid #dcdcdc;
+}
+.searchbtn{
+    width: 100px;
+    height:30px;
+    background:#ff6200;
+    color:#fff;
+    margin-left:15px;
+}
+.orderdetail,.confirmrefund{
+    padding:0 12px;
+}
+.btn-group{
+	width:80px;
+	height:30px;
+	position:relative;
+	cursor:pointer;
+}
+.upload-top{
+	width:80px;
+	height:30px;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:998;
+	background:#ff6200;
+	color:#fff;
+	border-radius:3px;
+	cursor:pointer;
+}
+.upload{
+	width:80px;
+	height:30px;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:999;
+	opacity:0;
+	border-radius:3px;
+	cursor:pointer;
+}
+.uploading-animate{
+	display:inline-block;
+	width:130px;
+	height:44px;
+	background:url("../../../images/uploading.gif") center no-repeat;
+	position: absolute;
+    left: 50%;
+    margin-left: -65px;
+    z-index:1001;
+}

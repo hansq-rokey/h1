@@ -1,0 +1,269 @@
+.partlist{
+    position: relative;
+    width: 100%;
+    height:40px;
+}
+.partlist li{
+    width:100px;
+    height:40px;
+    float: left;
+}
+.partlist li span.switch{
+    width: 85px;
+    display: inline-block;
+    height:40px;
+    line-height:40px;
+    margin:0 7px;
+    text-align: center;
+    cursor: pointer;
+}
+.partlist li span.switched{
+    border-bottom:2px solid #03a9f4;
+}
+.inforbox{
+    position: absolute;
+    top:40px;
+    left:0;
+    display: none;
+}
+.selectinforbox{
+    display: block;
+}
+.inforbox div table{
+    width: 100%;
+    text-align: center;
+    table-layout:fixed;
+}
+.inforbox div table thead{
+    background:#fafafa;
+}
+.inforbox div table tr td{
+    border:1px solid #dcdcdc;
+    padding:5px;
+    height:40px;
+}
+.modulelist tr td,.secondmodulelist tr td{
+    width: 20%;
+    overflow: hidden;
+}
+.modulelist tr td:first-child{
+    text-align: left;
+    text-indent: 100px;
+    min-width:300px;
+}
+.modulelist tr td:first-child.secondtd{
+    padding:0;
+    border:0;
+    text-align: center;
+    text-indent: 0;
+}
+.inforbox div table tr td.secondtd{
+    border:none;
+}
+.inforbox div table tr td:first-child.secondtd table tr:first-child td{
+    border-top:0;
+}
+.inforbox div table tr td:first-child.secondtd table tr:last-child td{
+    border-bottom:0;
+}
+.inforbox div table tr td:first-child.secondtd table tr td:first-child.thirdtd{
+    padding: 0;
+    border:0;
+    text-align: center;
+}.inforbox div table tr td:first-child.secondtd table tr td:first-child.thirdtd tr td{
+
+ }
+.inforbox div table tr td:first-child.secondtd table tr td:first-child.thirdtd tr td:first-child input.modulename{
+    margin-left:70px;
+}
+input[type=text]{
+    height:30px;
+    margin:5px;
+    border:1px solid #dcdcdc;
+}
+input.modulename{
+    width:140px;
+    float: left;
+}
+.moduleurl{
+    width: 180px;
+}
+.modulesort{
+    width: 80px;
+}
+.siblinglayel{
+    width: 500px;
+    height:450px;
+    background: #fff;
+    padding:10px 30px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left:-250px;
+    margin-top:-225px;
+    z-index: 999;
+}
+.sonlayel{
+    width: 500px;
+    height:340px;
+    background: #fff;
+    padding:10px 30px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left:-250px;
+    margin-top:-170px;
+    z-index: 999;
+}
+.addtypename{
+    display: inline-block;
+    width: 80px;
+    vertical-align: top;
+    margin-top:5px;
+    text-align: right;
+    height:30px;
+    line-height:30px;
+}
+.uploadimg{
+    width: 100px;
+    height:30px;
+    background:#ff6200;
+    color:#fff;
+    position: absolute;
+    left: 0;
+    top:0;
+    z-index: 9998;
+}
+.addoverview{
+    width: 300px;
+    height:70px;
+    border:1px solid #dcdcdc;
+}
+input.sortnum{
+    width: 60px;
+}
+.sortname{
+    width: 40px;
+}
+.checkspan{
+    padding:5px;
+    height:30px;
+    display: inline-block;
+    line-height:30px;
+}
+.checkspan input[type=checkbox]{
+    width: 14px;
+    height:14px;
+    vertical-align: middle;
+    margin:0;
+    margin-right:5px;
+}
+.delete,.cancel{
+    width: 100px;
+    height:30px;
+    background: #ff6200;
+    color:#fff;
+}
+.cancel{
+    background: #fff;
+    color:#666;
+}
+.filebox{
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height:30px;
+    margin-right:60px;
+    margin-top:5px;
+    float:right;
+}
+.file{
+    width: 100px;
+    height:30px;
+    position: absolute;
+    left: 0;
+    top:0px;
+    opacity: 0;
+    z-index: 9999;
+    cursor: pointer;
+}
+.addmodule,.addsonmodule{
+    width: 120px;
+    height:30px;
+    background:#ff6200;
+    color:#fff;
+    margin-bottom:20px;
+    margin-right:20px;
+}
+.modulelist tr.selectedtr td,.secondmodulelist tr.selectedtr td,.thirdmodulelist tr.selectedtr td{
+    background:#fafafa;
+}
+.userimgbox{
+    width: 66px;
+    height:66px;
+    position: relative;
+    display: none;
+    margin:0 auto;
+}
+.hidebtn{
+    opacity: 0;
+
+}
+.file{
+    width: 66px;
+    height:66px;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    cursor: pointer;
+}
+.changeuserimg{
+    width: 66px;
+    height:66px;
+    line-height:76px;
+    position: absolute;
+    top:0;
+    left: 0;
+    background:#666;
+    opacity: 0.8;
+    color:#fff;
+    text-align: center;
+    z-index: 999;
+    font-size:14px;
+    display: none;
+}
+.userimgbox:hover .changeuserimg{
+    display: block;
+}
+.inforbox div table.thirdmodulelist tr td{
+    padding:0;
+}
+.showicon,.hideicon{
+    width: 14px;
+    height:14px;
+    background-position:-327px -9px;
+    margin-top:12px;
+}
+.hideicon{
+    background-position:-327px -40px;
+}
+.secondicon{
+    margin-left:20px;
+}
+.userimg,.uploadicon{
+    position: absolute;
+    margin:auto;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+.uploadicon{
+	opacity:0;
+	cursor:pointer;
+	width:66px;
+	height:66px;
+	z-index:1000;
+}

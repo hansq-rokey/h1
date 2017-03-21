@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.bbs.BbsArticleDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.BbsArticle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="is_original" property="isOriginal" jdbcType="TINYINT" />
+    <result column="original_url" property="originalUrl" jdbcType="VARCHAR" />
+    <result column="top" property="top" jdbcType="TINYINT" />
+    <result column="good" property="good" jdbcType="TINYINT" />
+    <result column="notice" property="notice" jdbcType="TINYINT" />
+    <result column="official_certification" property="officialCertification" jdbcType="TINYINT" />
+    <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+    <result column="parise_count" property="pariseCount" jdbcType="INTEGER" />
+    <result column="reply_count" property="replyCount" jdbcType="INTEGER" />
+    <result column="is_report" property="isReport" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="available" property="available" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="activity_start_time" property="activityStartTime" jdbcType="DATE" />
+    <result column="activity_end_time" property="activityEndTime" jdbcType="DATE" />
+    <result column="from_type" property="fromType" jdbcType="TINYINT" />
+    <result column="is_top" property="isTop" jdbcType="TINYINT" />
+    <result column="apply_count" property="applyCount" jdbcType="INTEGER" />
+    <result column="activity_is_end" property="activityIsEnd" jdbcType="INTEGER" />
+     <result column="report_count" property="reportcount" jdbcType="INTEGER" />
+    <association column="user_id" property="user" select="com.ibaixiong.manage.dao.bbs.UserDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, pic_url, user_id, is_original, original_url, top, good, notice, official_certification, 
+    view_count, parise_count, reply_count, is_report, sort, create_date_time, available, activity_start_time, activity_end_time, from_type,
+    status,is_top,apply_count,activity_is_end,report_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <!--  查询普通帖子 -->
+  <resultMap id="BaseResultMap1" type="com.ibaixiong.entity.BbsArticle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="is_original" property="isOriginal" jdbcType="TINYINT" />
+    <result column="original_url" property="originalUrl" jdbcType="VARCHAR" />
+    <result column="top" property="top" jdbcType="TINYINT" />
+    <result column="good" property="good" jdbcType="TINYINT" />
+    <result column="notice" property="notice" jdbcType="TINYINT" />
+    <result column="official_certification" property="officialCertification" jdbcType="TINYINT" />
+    <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+    <result column="parise_count" property="pariseCount" jdbcType="INTEGER" />
+    <result column="reply_count" property="replyCount" jdbcType="INTEGER" />
+    <result column="is_report" property="isReport" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="available" property="available" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="activity_start_time" property="activityStartTime" jdbcType="DATE" />
+    <result column="activity_end_time" property="activityEndTime" jdbcType="DATE" />
+    <result column="from_type" property="fromType" jdbcType="TINYINT" />
+    <result column="is_top" property="isTop" jdbcType="TINYINT" />
+    <result column="fromName" property="fromName" jdbcType="VARCHAR" />
+    <result column="apply_count" property="applyCount" jdbcType="INTEGER" />
+    <result column="activity_is_end" property="activityIsEnd" jdbcType="INTEGER" />
+    <result column="report_count" property="reportcount" jdbcType="INTEGER" />
+    <association column="user_id" property="user" select="com.ibaixiong.manage.dao.bbs.UserDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List1" >
+    a.id, title, pic_url, user_id, is_original, original_url, top, good, notice, official_certification, 
+    view_count, parise_count, reply_count, is_report, a.sort, a.create_date_time, a.available, activity_start_time, activity_end_time, from_type,
+    a.status,is_top,fo.name fromName,apply_count,activity_is_end,report_count
+  </sql>  
+  <select id="queryArticleList1" resultMap="BaseResultMap1" >
+    select 
+    <include refid="Base_Column_List1" />
+    from tbl_bbs_article a
+      inner join tbl_bbs_form_article fa on a.id = fa.article_id 
+      inner join tbl_bbs_form fo on fa.form_id = fo.id
+    <if test="queryName != null">
+    	left join tbl_user u on u.id = a.user_id
+    </if>
+    where from_type = 1 and a.status=1
+    <if test="tagType != null">
+    	 <if test="tagType == 1">
+    	 <!-- 下拉第一个代表是精华帖 -->
+    		and good = 1
+    	</if>
+    	<if test="tagType == 2">
+    	 <!-- 下拉第一个代表是公告 -->
+    		and notice = 1
+    	</if>
+    	<if test="tagType == 3">
+    	 <!-- 下拉第一个代表是置顶帖 -->
+    		and top = 1
+    	</if>
+    	<if test="tagType == 4">
+    	 <!-- 下拉第一个代表是精华帖 -->
+    		and official_certification = 1
+    	</if>
+    </if>
+    <if test="isTop != null">
+    	<if test="isTop == 1">
+    	 	and is_top = 1 
+    	</if>
+    </if>
+    <if test="queryName != null">
+    	and ( title LIKE "%"#{queryName}"%"  or u.user_name LIKE "%"#{queryName}"%" )
+    </if>
+    <if test="form != null">
+    	and fa.form_id in 
+    	<foreach collection="form" item="item" index="index" open="(" separator="," close=")">
+  			#{item}
+  		</foreach>
+    </if>
+    <if test="sort != null">
+    	 <if test="sort == 1">
+    	 <!-- 下拉第一个代表是回复 -->
+    		order by reply_count desc 
+    	</if>
+    	<if test="sort == 2">
+    	 <!-- 下拉第一个代表是点赞 -->
+    		order by parise_count desc 
+    	</if>
+    	<if test="sort == 3">
+    	 <!-- 下拉第一个代表是查看 -->
+    		order by view_count desc 
+    	</if>
+    	<if test="sort == 4">
+    	 <!-- 下拉第一个代表是发布时间 -->
+    		order by create_date_time desc 
+    	</if>
+    </if>
+    <if test="sort == null">
+    	order by a.create_date_time desc
+    </if>
+  </select>
+  <select id="queryArticleList2" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_article 
+    where from_type = 2 and status=1
+    <if test="activityStatus != null">
+    	and  activity_is_end=#{activityStatus} 
+    </if>
+    order by create_date_time desc
+  </select>
+  <select id="queryArticleList3" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_article 
+    <!-- 这个特殊无需按照类型查询-->
+    where is_report= 1 and status = 1
+    order by create_date_time desc
+  </select>
+  <select id="queryArticleList4" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_article 
+    where from_type = 4
+    <if test="xyStatus != null">
+    	<if test="xyStatus == 1">
+    		and status = 0
+    	</if>
+    	<if test="xyStatus == 2">
+    		and status = 1
+    	</if>
+    </if>
+    order by create_date_time desc
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update tbl_bbs_article set status= -1
+      where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateStatus" parameterType="java.lang.Long" >
+    update tbl_bbs_article set status= #{status,jdbcType=TINYINT}
+      where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.BbsArticle" >
+    insert into tbl_bbs_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="user != null" >
+        user_id,
+      </if>
+      <if test="isOriginal != null" >
+        is_original,
+      </if>
+      <if test="originalUrl != null" >
+        original_url,
+      </if>
+      <if test="top != null" >
+        top,
+      </if>
+      <if test="good != null" >
+        good,
+      </if>
+      <if test="notice != null" >
+        notice,
+      </if>
+      <if test="officialCertification != null" >
+        official_certification,
+      </if>
+      <if test="viewCount != null" >
+        view_count,
+      </if>
+      <if test="pariseCount != null" >
+        parise_count,
+      </if>
+      <if test="replyCount != null" >
+        reply_count,
+      </if>
+      <if test="isReport != null" >
+        is_report,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user.id,jdbcType=BIGINT},
+      </if>
+      <if test="isOriginal != null" >
+        #{isOriginal,jdbcType=TINYINT},
+      </if>
+      <if test="originalUrl != null" >
+        #{originalUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null" >
+        #{top,jdbcType=TINYINT},
+      </if>
+      <if test="good != null" >
+        #{good,jdbcType=TINYINT},
+      </if>
+      <if test="notice != null" >
+        #{notice,jdbcType=TINYINT},
+      </if>
+      <if test="officialCertification != null" >
+        #{officialCertification,jdbcType=TINYINT},
+      </if>
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="pariseCount != null" >
+        #{pariseCount,jdbcType=INTEGER},
+      </if>
+      <if test="replyCount != null" >
+        #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null" >
+        #{isReport,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.BbsArticle" >
+    update tbl_bbs_article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        user_id = #{user.id,jdbcType=BIGINT},
+      </if>
+      <if test="isOriginal != null" >
+        is_original = #{isOriginal,jdbcType=TINYINT},
+      </if>
+      <if test="originalUrl != null" >
+        original_url = #{originalUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null" >
+        top = #{top,jdbcType=TINYINT},
+      </if>
+      <if test="good != null" >
+        good = #{good,jdbcType=TINYINT},
+      </if>
+      <if test="notice != null" >
+        notice = #{notice,jdbcType=TINYINT},
+      </if>
+      <if test="officialCertification != null" >
+        official_certification = #{officialCertification,jdbcType=TINYINT},
+      </if>
+      <if test="viewCount != null" >
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="pariseCount != null" >
+        parise_count = #{pariseCount,jdbcType=INTEGER},
+      </if>
+      <if test="replyCount != null" >
+        reply_count = #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null" >
+        is_report = #{isReport,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="available != null" >
+        available = #{available,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="delMemo != null" >
+        del_memo = #{delMemo,jdbcType=TINYINT},
+      </if>
+      <if test="closeMemo != null" >
+        close_memo = #{closeMemo,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateSort" parameterType="com.ibaixiong.entity.BbsArticle" >
+    update tbl_bbs_article
+    <set >
+    	<if test="sort != null" >
+        	sort = #{sort,jdbcType=INTEGER},
+        </if>
+        <if test="sort == null" >
+        	sort = null,
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateTagType" parameterType="com.ibaixiong.entity.BbsArticle" >
+    update tbl_bbs_article
+    <set >
+	   	  <if test="top != null" >
+	        top = #{top,jdbcType=TINYINT},
+	      </if>
+	      <if test="good != null" >
+	        good = #{good,jdbcType=TINYINT},
+	      </if>
+	      <if test="notice != null" >
+	        notice = #{notice,jdbcType=TINYINT},
+	      </if>
+	      <if test="officialCertification != null" >
+	        official_certification = #{officialCertification,jdbcType=TINYINT},
+	      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

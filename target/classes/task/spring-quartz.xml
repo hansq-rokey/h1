@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  <!-- 添加调度的任务bean 配置对应的class-->
+  <bean id="myPrintSchedule" class="com.ibaixiong.manage.task.OrderTask" />
+  
+  <!--关闭订单任务 配置调度具体执行的方�?->
+  <bean id="closedOrders"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="execute" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="closedOrdersTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="closedOrders" />
+    <property name="cronExpression">
+      <!-- 每天早上8点执行任务调�?-->
+      <value>0 */20 * * * ?</value>
+    </property>
+  </bean>
+  
+  <!--已发货订单任�?配置调度具体执行的方�?->
+  <bean id="sendedOrders"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="completeOrders" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="sendedOrdersTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="sendedOrders" />
+    <property name="cronExpression">
+      <!-- 每天早上8点执行任务调�?-->
+      <value>0 */30 * * * ?</value>
+    </property>
+  </bean>
+  <!--冻结金额去除�?��金额任务 配置调度具体执行的方�?->
+  <bean id="ssssAfterOrdersProfit"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="ssssAfterOrdersProfit" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="ssssAfterOrdersProfitTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="ssssAfterOrdersProfit" />
+    <property name="cronExpression">
+      <!-- 每天早上8点执行任务调�?-->
+      <value>0 */30 * * * ?</value>
+    </property>
+  </bean>
+  <!--4s店冻结金额转正常金额任务 配置调度具体执行的方�?->
+  <bean id="ssssFreezedOrders"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="ssssFreezedOrders" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="ssssFreezedOrdersTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="ssssFreezedOrders" />
+    <property name="cronExpression">
+      <!-- 每天早上8点执行任务调�?-->
+      <value>0 */10 * * * ?</value>
+    </property>
+  </bean>
+  <!--�?��码回归调�?->
+  <bean id="ssssInvitationCodeReset"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="ssssInvitationCodeReset" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="ssssInvitationCodeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="ssssInvitationCodeReset" />
+    <property name="cronExpression">
+      <!-- 每天早上8点执行任务调�?-->
+      <value>0 */40 * * * ?</value>
+    </property>
+  </bean>
+  
+  <!--智能温控器时间戳短信发�?-->
+  <bean id="smartDateErrorSend"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="sendSmartDateError" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!--配置调度执行的触发的时间-->
+  <bean id="smartDateErrorSendTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="smartDateErrorSend" />
+    <property name="cronExpression">
+      <!-- 每天晚上22点执行任务调�?-->
+      <value>0 0 22 * * ?</value>
+    </property>
+  </bean>
+  <!--智能温控器时间戳短信发�?-->
+  <!-- <bean id="smartAutoUpgrade"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="autoSmartUpgrade" />
+    <property name="concurrent" value="false" />
+  </bean>
+  配置调度执行的触发的时间
+  <bean id="smartAutoUpgradeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="smartAutoUpgrade" />
+    <property name="cronExpression">
+      每天晚上22点执行任务调�?
+      <value>0 0 22 * * ?</value>
+    </property>
+  </bean>
+  
+    智能温控器系统配置发�?start
+  <bean id="smartAutoUpgradeConfig"   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myPrintSchedule" />
+    <property name="targetMethod" value="autoSmartUpgradeConfig" />
+    <property name="concurrent" value="false" />
+  </bean>
+  配置调度执行的触发的时间
+  <bean id="smartAutoUpgradeConfigTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="smartAutoUpgradeConfig" />
+    <property name="cronExpression">
+      �?分钟执行任务调度
+      <value>0 0/10 * * * ?</value>
+    </property>
+  </bean> -->
+  <!-- 智能温控器系统配置发�?end -->
+  
+  <bean id="jobFactory" class="com.ibaixiong.manage.task.JobFactory"></bean>
+  
+  <!-- quartz的调度工�?调度工厂只能有一个，多个调度任务在list中添�?-->
+  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+         <!-- �?��的调度列�?->
+        <ref local="closedOrdersTrigger" />
+        <ref local="sendedOrdersTrigger" />
+        <ref local="ssssFreezedOrdersTrigger" />
+        <ref local="ssssInvitationCodeTrigger" />
+        <ref local="ssssAfterOrdersProfitTrigger" />
+        <ref local="smartDateErrorSendTrigger" />
+        <!-- <ref local="smartAutoUpgradeTrigger" />
+        <ref local="smartAutoUpgradeConfigTrigger" /> -->
+      </list>
+    </property>
+    <property name="jobFactory" ref="jobFactory"></property>
+  </bean>
+</beans>

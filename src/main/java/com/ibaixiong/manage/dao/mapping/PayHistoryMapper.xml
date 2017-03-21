@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.crm.PayHistoryDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.PayHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pay_number" property="payNumber" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="remain_money" property="remainMoney" jdbcType="REAL" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="ssss_id" property="ssssId" jdbcType="BIGINT" />
+    <result column="merchant_id" property="merchantId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pay_number, status, remark, user_id, money, remain_money, create_date_time, update_time,type,ssss_id,merchant_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_pay_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_pay_history
+    where (status = 1 or type=4) and user_id=#{userId}
+    	<if test="type!=null">
+    		and type=#{type}
+    	</if>
+    	<if test="startTime!=null and endTime!=null">
+    		and create_date_time &gt; #{startTime,jdbcType=TIMESTAMP} and create_date_time  &lt; #{endTime,jdbcType=TIMESTAMP}
+    	</if>
+    	order by create_date_time desc
+  </select>
+  <select id="getByNumber" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from tbl_pay_history
+    	where pay_number = #{number}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_pay_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.PayHistory" >
+    insert into tbl_pay_history (id, pay_number, status, 
+      remark, user_id, money, 
+      remain_money, create_date_time, update_time, 
+      type)
+    values (#{id,jdbcType=BIGINT}, #{payNumber,jdbcType=CHAR}, #{status,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{money,jdbcType=REAL}, 
+      #{remainMoney,jdbcType=REAL}, #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.PayHistory" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_pay_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payNumber != null" >
+        pay_number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="remainMoney != null" >
+        remain_money,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ssssId != null" >
+        ssss_id,
+      </if>
+      <if test="merchantId != null" >
+        merchant_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payNumber != null" >
+        #{payNumber,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="remainMoney != null" >
+        #{remainMoney,jdbcType=REAL},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="ssssId != null" >
+        #{ssssId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.PayHistory" >
+    update tbl_pay_history
+    <set >
+      <if test="payNumber != null" >
+        pay_number = #{payNumber,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="remainMoney != null" >
+        remain_money = #{remainMoney,jdbcType=REAL},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="ssssId != null" >
+        ssss_id = #{ssssId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPayNumber" parameterType="com.ibaixiong.entity.PayHistory" >
+    update tbl_pay_history
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="remainMoney != null" >
+        remain_money = #{remainMoney,jdbcType=REAL},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+       <if test="ssssId != null" >
+        ssss_id = #{ssssId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where pay_number = #{payNumber,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.PayHistory" >
+    update tbl_pay_history
+    set pay_number = #{payNumber,jdbcType=CHAR},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      money = #{money,jdbcType=REAL},
+      remain_money = #{remainMoney,jdbcType=REAL},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

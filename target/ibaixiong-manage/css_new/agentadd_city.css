@@ -1,0 +1,155 @@
+.age-tar{text-align: right;}
+.age-tal{text-align: left;}
+.age-tac{text-align: center;}
+.agetadd-txt{
+	width:150px;
+	display:inline-block;
+	text-align:right;
+}
+.versuper{
+	vertical-align: super;
+}
+.agentadd-city{
+	width:1100px;
+	margin:0 auto;
+}
+.agentadd-city-comm{
+	margin-top:20px;
+}
+.agentadd-city-comm input[type = text]{
+	width:180px;
+	height:35px;
+}
+.btn_add{
+    display: block;
+    text-align: center;
+}
+.btn_add .add_ct{
+     width: 98px;
+     height: 41px;
+     margin-top:40px;
+     border-radius: 4px;
+     border:0px;
+     line-height: 41px;
+     display: inline-block;
+     cursor: pointer;
+     background-color: rgb( 44, 163, 229 );
+     color: #fff;
+     outline:none;
+}
+/*
+*下拉
+*/
+.agetaddselect{
+	position:relative;
+	min-width:180px;
+	width:auto;
+	height:35px;
+	line-height:35px;
+    vertical-align: middle;
+	border:1px solid #ccc;
+	display:inline-block;
+}
+.agetaddselect:before{
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    top: 10px;
+    right: 10px;
+    background-image: url(../../images_new/on_1.png);
+}
+.agetaddselect:hover .agetadd-mian{
+	display:block!important;
+}
+.agetaddselect:hover::before{
+	background-image: url(../../images_new/on_2.png);
+}
+.agetaddselect em{
+	height:100%;
+	margin:0 30px 0 20px;
+	line-height:30px;
+	font-style:normal;
+	display:block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+.agetadd-mian{
+	position:absolute;
+	width:100%;
+	display:none;
+	margin-top:1px;
+	background:#fff;
+	border:1px solid #ccc;
+	border-top:0;
+	z-index:999;
+}
+.agetadd-mian li{
+	width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+.agetadd-mian li:hover{background:#ddd}
+.add_address {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+    line-height: 30px;
+    display: inline-block;
+    color: #fff;
+    background-color: rgb( 44, 163, 229 );
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+/*
+*地区选择
+*
+*/
+.clear_address{
+     width: 73%;
+     min-height: 100px;
+     padding:10px;
+     margin-top:20px;
+     margin-left:160px;
+     border: 1px solid #ccc;
+}
+.sele_box{
+	position:relative;
+	display:inline-block;
+	margin-left:10px;
+}
+.sele_box:hover .delect_city{
+	display:block;
+}
+.delect_city{
+	display:none;
+	position:absolute;
+	top:-10px;
+	right:-10px;
+	color:#f00;
+    cursor: pointer;
+	transform:rotate(45deg);
+	-ms-transform:rotate(45deg); 	/* IE 9 */
+	-moz-transform:rotate(45deg); 	/* Firefox */
+	-webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+	-o-transform:rotate(45deg);
+}
+.address-mian .add:hover{background: url(../image/address_add.png) center no-repeat #f7f9fb;}
+.addressSelect{line-height: 30px;color: #666;line-height: 30px;color: #666; display: inline-block;}
+.addressSelect div.sele{border: 1px solid #dcdcdc; margin-left: 5px;float: left;height: 30px;color:#b8b8b8;background: url(../images_new/address_arrow.png) 93px 15px no-repeat; position: relative;}
+.addressSelect div .txt{display: block; color: #b8b8b8;font-style: normal; padding-left: 10px; cursor: pointer; width: 100px;height: 30px; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;}
+.addressSelect span{width: 55px;display: block;float: left;}
+.loc{background:#fff;display:none;width: 100px;border: 1px solid #dcdcdc;height: 300px;overflow-y:scroll;border-top:none;position: absolute;top: 30px;left: 0;z-index: 99;background: #fff;  }
+.loc li{width: 100%;line-height: 1;padding: 5px 0;margin-top: 5px; margin-bottom: 0; text-align: center;font-size: 14px; cursor: pointer; vertical-align: middle;display: block;}
+:root .loc{width: 126px\9\0;}
+.loc li:hover{background:#ccc}

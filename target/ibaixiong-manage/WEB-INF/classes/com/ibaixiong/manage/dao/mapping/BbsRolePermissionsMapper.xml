@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.bbs.BbsRolePermissionsDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.BbsRolePermissions" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  	<association column="role_id" property="role" select="com.ibaixiong.manage.dao.bbs.BbsRoleDao.selectByPrimaryKey"/>
+    <association column="permission_id" property="permission" select="com.ibaixiong.manage.dao.bbs.BbsPermissionsDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, permission_id, create_date_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_role_permissions
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getRolePermissionsByPerId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_role_permissions
+    where permission_id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getRolePerByPerAndRole" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bbs_role_permissions
+    where status = 1 and permission_id = #{perId,jdbcType=BIGINT} and role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_bbs_role_permissions
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByRole" parameterType="java.lang.Long" >
+    delete from tbl_bbs_role_permissions
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.BbsRolePermissions" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_bbs_role_permissions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="role != null" >
+        role_id,
+      </if>
+      <if test="permission != null" >
+        permission_id,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="role != null" >
+        #{role.id,jdbcType=BIGINT},
+      </if>
+      <if test="permission != null" >
+        #{permission.id,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.BbsRolePermissions" >
+    update tbl_bbs_role_permissions
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="permissionId != null" >
+        permission_id = #{permissionId,jdbcType=BIGINT},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

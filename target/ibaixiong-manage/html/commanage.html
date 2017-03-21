@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link href="../plug/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/pubstyle.css" rel="stylesheet" type="text/css">
+    <link href="../css/commanage.css" rel="stylesheet" type="text/css">
+    <script src="../plug/jQuery/jquery-1.8.3.min.js" type="text/javascript" ></script>
+    <script src="../js/public.js" type="text/javascript" ></script>
+    <script src="../js/basedata.js" type="text/javascript" ></script>
+    <title>通用管理</title>
+</head>
+<body>
+<header class="pubtop">
+    <img src="../images/userimg.png" class="userimg fl">
+    <span class="username fl">杀阡陌<i class="arrow arrowdown"></i> </span>
+</header>
+<aside class="publeftnav">
+    <ul class="publeftnavul">
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks prodicon"></i>商品管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks equipicon"></i>设备管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks finanicon"></i>财务管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks storageicon"></i>仓储管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks bbsicon"></i>社区管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks usericon"></i>用户管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks saleaftericon"></i>售后管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks systemicon"></i>系统管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+        <li class="firstnavli">
+            <a href="#"> <span class="firstnav"><i class="marks customericon"></i>客诉管理<i class="arrow arrow-right"></i></span></a>
+            <ul>
+                <a href="#"><li class="secondnavli"><span class="secondnav">商品列表</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">新增商品</span></li></a>
+                <a href="#"><li class="secondnavli"><span class="secondnav">类目设置</span></li></a>
+            </ul>
+        </li>
+    </ul>
+</aside>
+<div class="rightbox">
+    <section>
+        <ul class="partlist">
+            <li>
+                <span class="switch switched">增长规则</span>
+                <div class="inforbox selectinforbox">
+                    <div class="row">
+                        <table class="riselist">
+                            <thead>
+                            <tr>
+                                <td>类型</td>
+                                <td>积分</td>
+                                <td>经验</td>
+                                <td>活跃度</td>
+                                <td>上限值</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>类型</td>
+                                <td><input type="text" value="" class="pointtext"> </td>
+                                <td><input type="text" value="" class="exptext"></td>
+                                <td><input type="text" value="" class="acttext"></td>
+                                <td>上限值</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="switch">等级管理</span>
+                <div class="inforbox">
+                    <div class="row">
+                        <input type="button" class="addlevel" value="新增下级菜单">
+                        <table class="gradelist">
+                            <thead>
+                            <tr>
+                                <td>等级</td>
+                                <td>图标</td>
+                                <td>经验值</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="menutr">
+                                <td>白熊1</td>
+                                <td><img src="#" class="levelgrade"> </td>
+                                <td>1233</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+<div class="pop addgradepop">
+    <div class="popbg"></div>
+    <div class="layel">
+        <h3 class="poptitle">新增等级<i class="closeicon"></i> </h3>
+        <div class="row">
+            <span class="addtypename">等级名称：</span>
+            <input type="text" class="addmodulename" value="">
+            <span class="filebox"><input type="file" class="file"> <input type="button" class="uploadimg" value="上传图片"></span>
+        </div>
+        <div class="row">
+            <span class="addtypename">url：</span>
+            <input type="text" class="urlvalue" value="">
+        </div>
+        <div class="row tc">
+            <input type="button" value="删除" class="delete">
+            <input type="button" value="取消" class="cancel">
+        </div>
+    </div>
+</div>
+</body>
+</html>

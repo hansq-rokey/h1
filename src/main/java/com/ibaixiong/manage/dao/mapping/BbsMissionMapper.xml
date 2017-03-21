@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.bbs.BbsMissionDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.BbsMission" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="author_id" property="authorId" jdbcType="INTEGER" />
+    <result column="in_time" property="inTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ibaixiong.entity.BbsMission" >
+    insert into tbl_bbs_mission (id, score, author_id, 
+      in_time)
+    values (#{id,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, 
+      #{inTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.BbsMission" >
+    insert into tbl_bbs_mission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="inTime != null" >
+        in_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="inTime != null" >
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

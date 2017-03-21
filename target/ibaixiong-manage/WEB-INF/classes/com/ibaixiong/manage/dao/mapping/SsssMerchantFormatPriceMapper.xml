@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.crm.SsssMerchantFormatPriceDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SsssMerchantFormatPrice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="merchant_id" property="merchantId" jdbcType="BIGINT" />
+    <result column="format_id" property="formatId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="ssss_id" property="ssssId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, merchant_id, format_id, status, create_date_time, update_time, creator_id, price,ssss_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ssss_merchant_format_price
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <!-- 查询城运商价格 -->
+  <select id="getSsssMerchantFormatPriceByFormatIdAndMerchantId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ssss_merchant_format_price
+    where format_id = #{formatId,jdbcType=BIGINT} and merchant_id = #{merchantId,jdbcType=BIGINT}
+  </select>
+  <!-- 查询4S店价格 -->
+  <select id="getSsssFormatPriceByFormatIdAndssssId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ssss_merchant_format_price
+    where format_id = #{formatId,jdbcType=BIGINT} and ssss_id = #{ssssId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_ssss_merchant_format_price
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.SsssMerchantFormatPrice" >
+    insert into tbl_ssss_merchant_format_price (id, merchant_id, format_id, 
+      status, create_date_time, update_time, 
+      creator_id, price)
+    values (#{id,jdbcType=BIGINT}, #{merchantId,jdbcType=BIGINT}, #{formatId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=BIGINT}, #{price,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SsssMerchantFormatPrice" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_ssss_merchant_format_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchantId != null" >
+        merchant_id,
+      </if>
+      <if test="formatId != null" >
+        format_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="ssssId != null" >
+        ssss_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="formatId != null" >
+        #{formatId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="ssssId != null" >
+        #{ssssId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SsssMerchantFormatPrice" >
+    update tbl_ssss_merchant_format_price
+    <set >
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="formatId != null" >
+        format_id = #{formatId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="ssssId != null" >
+        ssss_id = #{ssssId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.SsssMerchantFormatPrice" >
+    update tbl_ssss_merchant_format_price
+    set merchant_id = #{merchantId,jdbcType=BIGINT},
+      format_id = #{formatId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      price = #{price,jdbcType=REAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

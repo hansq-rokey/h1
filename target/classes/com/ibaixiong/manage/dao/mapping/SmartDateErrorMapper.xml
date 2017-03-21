@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartDateErrorDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SmartDateError" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bxid" property="bxid" jdbcType="CHAR" />
+    <result column="bxcode" property="bxcode" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="CHAR" />
+    <result column="log_des" property="logDes" jdbcType="VARCHAR" />
+    <result column="smart_time" property="smartTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bxid, bxcode, type, create_time, user_id, ip, log_des, smart_time, status
+  </sql>
+  <select id="queryDateErrors" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_date_error
+    where  status = #{status,jdbcType=TINYINT}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_date_error
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_smart_date_error
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.SmartDateError" >
+    insert into tbl_smart_date_error (id, bxid, bxcode, type, 
+      create_time, user_id, ip, 
+      log_des, smart_time, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{bxid,jdbcType=CHAR}, #{bxcode,jdbcType=CHAR}, #{type,jdbcType=SMALLINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, #{ip,jdbcType=CHAR}, 
+      #{logDes,jdbcType=VARCHAR}, #{smartTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SmartDateError" >
+    insert into tbl_smart_date_error
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bxid != null" >
+        bxid,
+      </if>
+      <if test="bxcode != null" >
+        bxcode,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="logDes != null" >
+        log_des,
+      </if>
+      <if test="smartTime != null" >
+        smart_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bxid != null" >
+        #{bxid,jdbcType=CHAR},
+      </if>
+      <if test="bxcode != null" >
+        #{bxcode,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=CHAR},
+      </if>
+      <if test="logDes != null" >
+        #{logDes,jdbcType=VARCHAR},
+      </if>
+      <if test="smartTime != null" >
+        #{smartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SmartDateError" >
+    update tbl_smart_date_error
+    <set >
+      <if test="bxid != null" >
+        bxid = #{bxid,jdbcType=CHAR},
+      </if>
+      <if test="bxcode != null" >
+        bxcode = #{bxcode,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=CHAR},
+      </if>
+      <if test="logDes != null" >
+        log_des = #{logDes,jdbcType=VARCHAR},
+      </if>
+      <if test="smartTime != null" >
+        smart_time = #{smartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.SmartDateError" >
+    update tbl_smart_date_error
+    set bxid = #{bxid,jdbcType=CHAR},
+      bxcode = #{bxcode,jdbcType=CHAR},
+      type = #{type,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=CHAR},
+      log_des = #{logDes,jdbcType=VARCHAR},
+      smart_time = #{smartTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

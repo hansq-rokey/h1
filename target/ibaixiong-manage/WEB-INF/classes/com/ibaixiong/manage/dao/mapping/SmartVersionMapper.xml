@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartVersionDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SmartVersion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bxid4" property="bxid4" jdbcType="CHAR" />
+    <result column="c_version_last" property="cVersionLast" jdbcType="CHAR" />
+    <result column="c_version_last2" property="cVersionLast2" jdbcType="CHAR" />
+    <result column="c_version_last4" property="cVersionLast4" jdbcType="CHAR" />
+    <result column="upgrade_bin" property="upgradeBin" jdbcType="VARCHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bxid4, c_version_last, c_version_last2, c_version_last4, upgrade_bin, create_date_time, 
+    update_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_version
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="listSmartVersionsByStatus" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_version
+    where status = #{status,jdbcType=TINYINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_smart_version
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.SmartVersion" keyProperty="id" useGeneratedKeys="true">
+    insert into tbl_smart_version (id, bxid4, c_version_last, 
+      c_version_last2, c_version_last4, upgrade_bin, 
+      create_date_time, update_time, status
+      )
+    values (#{id,jdbcType=BIGINT}, #{bxid4,jdbcType=CHAR}, #{cVersionLast,jdbcType=CHAR}, 
+      #{cVersionLast2,jdbcType=CHAR}, #{cVersionLast4,jdbcType=CHAR}, #{upgradeBin,jdbcType=VARCHAR}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SmartVersion" keyProperty="id" useGeneratedKeys="true">
+    insert into tbl_smart_version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bxid4 != null" >
+        bxid4,
+      </if>
+      <if test="cVersionLast != null" >
+        c_version_last,
+      </if>
+      <if test="cVersionLast2 != null" >
+        c_version_last2,
+      </if>
+      <if test="cVersionLast4 != null" >
+        c_version_last4,
+      </if>
+      <if test="upgradeBin != null" >
+        upgrade_bin,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bxid4 != null" >
+        #{bxid4,jdbcType=CHAR},
+      </if>
+      <if test="cVersionLast != null" >
+        #{cVersionLast,jdbcType=CHAR},
+      </if>
+      <if test="cVersionLast2 != null" >
+        #{cVersionLast2,jdbcType=CHAR},
+      </if>
+      <if test="cVersionLast4 != null" >
+        #{cVersionLast4,jdbcType=CHAR},
+      </if>
+      <if test="upgradeBin != null" >
+        #{upgradeBin,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SmartVersion" >
+    update tbl_smart_version
+    <set >
+      <if test="bxid4 != null" >
+        bxid4 = #{bxid4,jdbcType=CHAR},
+      </if>
+      <if test="cVersionLast != null" >
+        c_version_last = #{cVersionLast,jdbcType=CHAR},
+      </if>
+      <if test="cVersionLast2 != null" >
+        c_version_last2 = #{cVersionLast2,jdbcType=CHAR},
+      </if>
+      <if test="cVersionLast4 != null" >
+        c_version_last4 = #{cVersionLast4,jdbcType=CHAR},
+      </if>
+      <if test="upgradeBin != null" >
+        upgrade_bin = #{upgradeBin,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.SmartVersion" >
+    update tbl_smart_version
+    set bxid4 = #{bxid4,jdbcType=CHAR},
+      c_version_last = #{cVersionLast,jdbcType=CHAR},
+      c_version_last2 = #{cVersionLast2,jdbcType=CHAR},
+      c_version_last4 = #{cVersionLast4,jdbcType=CHAR},
+      upgrade_bin = #{upgradeBin,jdbcType=VARCHAR},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.bbs.BbsNotificationDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.BbsNotification" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="read" property="read" jdbcType="TINYINT" />
+    <result column="from_author_id" property="fromAuthorId" jdbcType="INTEGER" />
+    <result column="author_id" property="authorId" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="in_time" property="inTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ibaixiong.entity.BbsNotification" >
+    insert into tbl_bbs_notification (id, message, read, 
+      from_author_id, author_id, tid, 
+      rid, in_time)
+    values (#{id,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, #{read,jdbcType=TINYINT}, 
+      #{fromAuthorId,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, 
+      #{rid,jdbcType=INTEGER}, #{inTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.BbsNotification" >
+    insert into tbl_bbs_notification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="read != null" >
+        read,
+      </if>
+      <if test="fromAuthorId != null" >
+        from_author_id,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="inTime != null" >
+        in_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="read != null" >
+        #{read,jdbcType=TINYINT},
+      </if>
+      <if test="fromAuthorId != null" >
+        #{fromAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="inTime != null" >
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

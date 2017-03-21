@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ibaixiong.manage.dao.crm.StaffRegionDao">
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.StaffRegion">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_tag" jdbcType="INTEGER" property="orderTag" />
+    <result column="invalid" jdbcType="TINYINT" property="invalid" />
+    <result column="created_datetime" jdbcType="TIMESTAMP" property="createdDatetime" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="parent" jdbcType="BIGINT" property="parent" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_tag, invalid, created_datetime, grade, parent, name,code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_staff_region
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

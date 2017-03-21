@@ -1,0 +1,156 @@
+.partlist{
+    position: relative;
+    border-bottom:1px solid #dcdcdc;
+    width: 100%;
+    height:40px;
+}
+.partlist li{
+    width:100px;
+    height:40px;
+    float: left;
+}
+.partlist li span.switch{
+    width: 85px;
+    display: inline-block;
+    height:40px;
+    line-height:40px;
+    margin:0 7px;
+    text-align: center;
+    cursor: pointer;
+}
+.partlist li span.switched{
+    border-bottom:2px solid #03a9f4;
+}
+.inforbox{
+    position: absolute;
+    top:40px;
+    left:0;
+    display: none;
+    z-index: 99;
+    background:#fff;
+}
+.layel div.row,.popinforbox div.row{
+    padding-left:50px;
+}
+.selectinforbox{
+    display: block;
+}
+.selectinput{
+    float: none;
+}
+.inforbox div table{
+    width: 100%;
+    text-align: center;
+}
+.inforbox div table thead{
+    background:#fafafa;
+}
+.inforbox div table tr td{
+    border:1px solid #dcdcdc;
+    height:40px;
+}
+.inforbox div table tr td input[type=text]{
+    width: 290px;
+    height:30px;
+    margin:5px;
+    border:1px solid #dcdcdc;
+}
+.personlist{
+    margin-top:20px;
+}
+.searchbtn,.addperson,.addrole,.addpersonbtn,.addrolebtn,.confirm{
+    width: 100px;
+    height:30px;
+    background:#ff6200;
+    color:#fff;
+    margin-bottom:20px;
+    margin-top:10px;
+    margin-left:30px;
+}
+.confirm{
+    margin-top:60px;
+}
+.addpersonbtn,.addrolebtn{
+    margin-left:0;
+}
+.addperson,.addrole{
+    float: right;
+}
+.personname,.rolename{
+    width: 254px;
+    height:30px;
+    border:1px solid #dcdcdc;
+}
+.amend,.disabled,.delete,.checkrole,.delrole{
+    padding:0 10px;
+}
+.delrole:hover,.checkrole:hover,.link:hover{
+    color:#ff6200;
+}
+/*����Ա��*/
+.personaccount,.personpass,.surepass,.personname,.personmobile{
+    width:200px;
+    height:30px;
+    border:1px solid#dcdcdc;
+}
+.personaccount{
+    margin:0;
+}
+.personattr{
+    width: 80px;
+    display: inline-block;
+}
+.rolecheckbox{
+    width: 200px;
+    height:30px;
+    line-height:30px;
+}
+input.rolecheck,input.parentcheck{
+    width: 14px;
+    height:14px;
+    margin-right:5px;
+    margin-top:3px;
+}
+.space{
+    display: inline-block;
+    width: 10px;
+}
+.soncheckbox{
+    padding-top:0;
+    padding-left:10px;
+    width: 400px;
+}
+input.soncheck{
+    margin-left: 15px;
+    margin-right:5px;
+}
+.parentcheckbox{
+    font-weight: 600;
+}
+.closeicon{
+    width: 9px;
+    height:9px;
+    display: inline-block;
+    background:url("../images/icon.png") no-repeat -288px -12px;
+    float: right;
+    margin-right:12px;
+    margin-top:11px;
+    cursor: pointer;
+}
+.warningtext{
+    width: 270px;
+    margin: 0 auto;
+    margin-top:30px;
+}
+.addtitle{
+    border-bottom:1px solid #dcdcdc;
+    height:40px;
+    line-height:40px;
+    text-indent:50px;
+    font-size:16px;
+}
+.checkspan{
+    display: inline-block;
+    width: 80px;
+    height:30px;
+}

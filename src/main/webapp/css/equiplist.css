@@ -1,0 +1,31 @@
+.rightbox{
+    width:100%;
+}
+.bh {
+    margin-top:15px;
+	margin-bottom:15px;
+	font-size:17px;
+}
+.haoma{
+    color:#FF0000;
+}
+.sbb{
+    width:100%;
+    text-align: center;
+}
+.sbb tr td{
+    border: 1px solid #dcdcdc;
+    height: 40px;
+}
+.sbb tr td:last-child{
+    border: 1px solid #dcdcdc;
+    height: 40px;
+    text-indent: 10px;
+}
+.sbb thead{
+    background:#fafafa;
+	color:#999999;
+}
+.czrz{
+    text-align:left;
+}

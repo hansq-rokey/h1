@@ -1,0 +1,97 @@
+/******* 用户密码修改 ********/
+
+.updateUserPwd_wrap{
+    width: 254px;
+    height: 201px;
+    font-size: 12px;
+    margin: 0 auto;
+    padding: 0 auto;
+    display: block;
+    position: absolute;
+    z-index: 1002;
+}
+.updateUserPwd_win_content{
+    width: 250px;
+    border: 1px solid #0580ad;
+    height: 130px;
+    background: #d6eaf6;
+}
+.updateUserPwd_win_condition table{
+    width:250px;
+    margin-top: 5px;
+}
+.Pwdinput{
+    border: 1px solid #bbbcbe;
+    height: 20px;
+}
+.UpdatePwd_td1{
+    width: 60px;
+    text-align: right;
+}
+/********  用户信息修改  ************/
+.UpdateUserInfo_wrap{
+    width: 502px;
+    height: 201px;
+    font-size: 12px;
+    margin: 0 auto;
+    padding: 0 auto;
+    display: block;
+    position: absolute;
+    z-index: 1002;
+    top:240px;
+}
+
+/*********  头部下拉信息   *******/
+#UserInfoPwdupdate{
+    width: 83px;
+    position: absolute;
+    z-index: 1002;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    top:12px;
+    right: 37px;
+}
+.Info_title{
+    height: 15px;
+    width: 83px;
+    font-size: 0;
+    background: url(../images/index/lave_03.png) no-repeat;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='scale', src="../images/index/lave_03.png");
+    _background:none;
+}
+.Infor_content{
+    height: 80px;
+    width: 83px;
+    background: url(../images/index/lave_06.gif) repeat-y;
+}
+.Infor_content ul{
+    margin: 0;
+    padding: 0;
+
+}
+.Infor_content ul li{
+    list-style: none;
+    margin-left: 0px;
+    display:block;
+    text-align: center;
+    height: 23px;
+    padding-top:4px ;
+    border-bottom:1px dashed #b9b9b9 ;
+}
+.Infor_content ul li a{
+    color: #000000;
+    text-decoration: none;
+}
+.Infor_content ul li a:hover{
+    color: blue;
+    text-decoration: underline;
+}
+.Infor_footer{
+    height: 7px;
+    width: 83px;
+    font-size: 0;
+    background: url(../images/index/lave_08.png) no-repeat;
+     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='scale', src="../images/index/lave_08.png");
+    _background:none;
+}

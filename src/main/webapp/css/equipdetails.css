@@ -1,0 +1,20 @@
+.searchbtn{
+   width: 100px;
+    height:30px;
+    background:#ff6200;
+    color:#fff;
+    margin-bottom:20px;
+    margin-left:30px;
+}
+.biaoge{
+    width: 100%;
+    text-align: center;
+	border:1px solid #dcdcdc;
+}
+.biaoge thead{
+    background:#fafafa;
+}
+.biaoge tr td{
+    border:1px solid #dcdcdc;
+    height:40px;
+}

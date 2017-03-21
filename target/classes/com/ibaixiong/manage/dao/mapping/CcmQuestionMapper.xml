@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.ccm.CcmQuestionDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.CcmQuestion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="coustomer_name" property="coustomerName" jdbcType="VARCHAR" />
+    <result column="call_me" property="callMe" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="cc_time" property="ccTime" jdbcType="TIMESTAMP" />
+    <result column="assign_time" property="assignTime" jdbcType="TIMESTAMP" />
+    <result column="cs_memo" property="csMemo" jdbcType="VARCHAR" />
+    <result column="customers_memo" property="customersMemo" jdbcType="VARCHAR" />
+    <result column="rate" property="rate" jdbcType="TINYINT" />
+    <result column="process_status" property="processStatus" jdbcType="TINYINT" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <association column="cc_type_id" property="ccmType" select="com.ibaixiong.manage.dao.ccm.CcmTypeDao.selectByPrimaryKey"/>
+    <association column="user_id" property="user" select="com.ibaixiong.manage.dao.bbs.UserDao.selectByPrimaryKey"/>
+    <association column="admin_id" property="admin" select="com.ibaixiong.manage.dao.sys.SysAdminDao.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, coustomer_name, call_me, user_id, tel, cc_time, cc_type_id, admin_id, assign_time, 
+    cs_memo, customers_memo, rate, process_status, create_date_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_ccm_question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="queryList" resultMap="BaseResultMap" >
+  	select 
+  		<if test="queryType != 2">
+  			<include refid="Base_Column_List" />
+  		</if>
+  		<if test="queryType == 2">
+	  	 	<if test="name != null">
+	  	 		 a.id, coustomer_name, call_me, user_id, tel, cc_time, cc_type_id, a.admin_id, assign_time, 
+   				 cs_memo, customers_memo, rate, process_status, a.create_date_time, a.status
+	  	 	</if>
+	  	 	<if test="name == null">
+	  	 		<include refid="Base_Column_List" />
+	  	 	</if>
+  	 	</if>
+  	 from tbl_ccm_question a
+  	 <if test="queryType == 2">
+  	 	<if test="name != null">
+  	 		left join tbl_sys_admin admin on a.admin_id = admin.id
+  	 		left join tbl_user user on a.user_id = user.id
+  	 	</if>
+  	 </if>
+  	 where a.status=1
+  	 <!-- 查询指派给我的记录 -->
+    <if test="queryType == 1">
+    	<!-- 查询指派给当前登陆人的过滤掉重复指定的记录 -->
+    	and id in (
+    		select distinct b.questions_id from tbl_ccm_process b where b.admin_id =#{adminId} and b.status=1
+    	)
+    </if>
+    <!-- 查询全部问题 -->
+    <if test="queryType == 2">
+    	<if test="name != null">
+    	 	and (a.call_me like "%"#{name}"%" or tel like "%"#{name}"%" or admin.user_name like "%"#{name}"%" or user.user_name like "%"#{name}"%")
+    	</if>
+    </if>
+    <!-- 查询网上的投诉 -->
+    <if test="queryType == 3">
+    	<if test="questionStatus != null">
+    		and a.process_status = #{questionStatus}
+    	</if>
+    	and a.user_id is not null <!-- 说明是网上投诉的该字段不为空条件必须 -->
+    </if>
+    <!-- 查询自己录入的问题 -->
+    <if test="queryType == 4">
+    	<if test="questionStatus != null">
+    		and a.process_status = #{questionStatus}
+    	</if>
+    	and a.admin_id =#{adminId} <!-- 查询自己录入的问题 -->
+    	and a.user_id is null <!-- 说明是自己录入的的该字段不为空条件必须 -->
+    </if>
+    order by a.create_date_time desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_ccm_question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.CcmQuestion" useGeneratedKeys="true" keyProperty="id">
+    insert into tbl_ccm_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coustomerName != null" >
+        coustomer_name,
+      </if>
+      <if test="callMe != null" >
+        call_me,
+      </if>
+      <if test="user != null" >
+        user_id,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="ccTime != null" >
+        cc_time,
+      </if>
+      <if test="ccmType != null" >
+        cc_type_id,
+      </if>
+      <if test="admin != null" >
+        admin_id,
+      </if>
+      <if test="assignTime != null" >
+        assign_time,
+      </if>
+      <if test="csMemo != null" >
+        cs_memo,
+      </if>
+      <if test="customersMemo != null" >
+        customers_memo,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="processStatus != null" >
+        process_status,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coustomerName != null" >
+        #{coustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="callMe != null" >
+        #{callMe,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user.id,jdbcType=CHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="ccTime != null" >
+        #{ccTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ccmType != null" >
+        #{ccmType.id,jdbcType=BIGINT},
+      </if>
+      <if test="admin != null" >
+        #{admin.id,jdbcType=BIGINT},
+      </if>
+      <if test="assignTime != null" >
+        #{assignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="csMemo != null" >
+        #{csMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="customersMemo != null" >
+        #{customersMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=TINYINT},
+      </if>
+      <if test="processStatus != null" >
+        #{processStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.CcmQuestion" >
+    update tbl_ccm_question
+    <set >
+      <if test="coustomerName != null" >
+        coustomer_name = #{coustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="callMe != null" >
+        call_me = #{callMe,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        user_id = #{user.id,jdbcType=CHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="ccTime != null" >
+        cc_time = #{ccTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ccmType != null" >
+        cc_type_id = #{ccmType.id,jdbcType=BIGINT},
+      </if>
+      <if test="admin != null" >
+        admin_id = #{admin.id,jdbcType=BIGINT},
+      </if>
+      <if test="assignTime != null" >
+        assign_time = #{assignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="csMemo != null" >
+        cs_memo = #{csMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="customersMemo != null" >
+        customers_memo = #{customersMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=TINYINT},
+      </if>
+      <if test="processStatus != null" >
+        process_status = #{processStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

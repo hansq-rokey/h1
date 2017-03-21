@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.smart.SmartTaskDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.SmartTask" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="job_name" property="jobName" jdbcType="VARCHAR" />
+    <result column="job_group_name" property="jobGroupName" jdbcType="VARCHAR" />
+    <result column="trigger_name" property="triggerName" jdbcType="VARCHAR" />
+    <result column="trigger_group_name" property="triggerGroupName" jdbcType="VARCHAR" />
+    <result column="interval_time" property="intervalTime" jdbcType="VARCHAR" />
+    <result column="job_desc" property="jobDesc" jdbcType="VARCHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="job_status" property="jobStatus" jdbcType="TINYINT" />
+    <result column="start_date_time" property="startDateTime" jdbcType="TIMESTAMP" />
+    <result column="end_date_time" property="endDateTime" jdbcType="TIMESTAMP" />
+    <result column="update_date_time" property="updateDateTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="method_name" property="methodName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, job_name, job_group_name, trigger_name, trigger_group_name, interval_time, job_desc, 
+    create_date_time, job_status, start_date_time, end_date_time,update_date_time,type,method_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_smart_task
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_smart_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.SmartTask" >
+    insert into tbl_smart_task (id, job_name, job_group_name, 
+      trigger_name, trigger_group_name, interval_time, 
+      job_desc, create_date_time, job_status, 
+      start_date_time, end_date_time,update_date_time,type,method_name)
+    values (#{id,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, #{jobGroupName,jdbcType=VARCHAR}, 
+      #{triggerName,jdbcType=VARCHAR}, #{triggerGroupName,jdbcType=VARCHAR}, #{intervalTime,jdbcType=VARCHAR}, 
+      #{jobDesc,jdbcType=VARCHAR}, #{createDateTime,jdbcType=TIMESTAMP}, #{jobStatus,jdbcType=TINYINT}, 
+      #{startDateTime,jdbcType=TIMESTAMP}, #{endDateTime,jdbcType=TIMESTAMP},
+      #{updateDateTime,jdbcType=TIMESTAMP},#{type,jdbcType=VARCHAR},#{methodName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.SmartTask" >
+    insert into tbl_smart_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jobName != null" >
+        job_name,
+      </if>
+      <if test="jobGroupName != null" >
+        job_group_name,
+      </if>
+      <if test="triggerName != null" >
+        trigger_name,
+      </if>
+      <if test="triggerGroupName != null" >
+        trigger_group_name,
+      </if>
+      <if test="intervalTime != null" >
+        interval_time,
+      </if>
+      <if test="jobDesc != null" >
+        job_desc,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="jobStatus != null" >
+        job_status,
+      </if>
+      <if test="startDateTime != null" >
+        start_date_time,
+      </if>
+      <if test="endDateTime != null" >
+        end_date_time,
+      </if>
+      <if test="updateDateTime != null" >
+        update_date_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="methodName != null" >
+        method_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null" >
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroupName != null" >
+        #{jobGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null" >
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroupName != null" >
+        #{triggerGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null" >
+        #{intervalTime,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDesc != null" >
+        #{jobDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobStatus != null" >
+        #{jobStatus,jdbcType=TINYINT},
+      </if>
+      <if test="startDateTime != null" >
+        #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDateTime != null" >
+        #{endDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDateTime != null" >
+        #{updateDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.SmartTask" >
+    update tbl_smart_task
+    <set >
+      <if test="jobName != null" >
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroupName != null" >
+        job_group_name = #{jobGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null" >
+        trigger_name = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroupName != null" >
+        trigger_group_name = #{triggerGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null" >
+        interval_time = #{intervalTime,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDesc != null" >
+        job_desc = #{jobDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobStatus != null" >
+        job_status = #{jobStatus,jdbcType=TINYINT},
+      </if>
+      <if test="startDateTime != null" >
+        start_date_time = #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDateTime != null" >
+        end_date_time = #{endDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDateTime != null" >
+        update_date_time = #{updateDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        method_name = #{methodName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.SmartTask" >
+    update tbl_smart_task
+    set job_name = #{jobName,jdbcType=VARCHAR},
+      job_group_name = #{jobGroupName,jdbcType=VARCHAR},
+      trigger_name = #{triggerName,jdbcType=VARCHAR},
+      trigger_group_name = #{triggerGroupName,jdbcType=VARCHAR},
+      interval_time = #{intervalTime,jdbcType=VARCHAR},
+      job_desc = #{jobDesc,jdbcType=VARCHAR},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      job_status = #{jobStatus,jdbcType=TINYINT},
+      start_date_time = #{startDateTime,jdbcType=TIMESTAMP},
+      end_date_time = #{endDateTime,jdbcType=TIMESTAMP},
+      update_date_time = #{updateDateTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR},
+      method_name = #{methodName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

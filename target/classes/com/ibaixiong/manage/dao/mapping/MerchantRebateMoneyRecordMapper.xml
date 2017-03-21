@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.crm.MerchantRebateMoneyRecordDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.MerchantRebateMoneyRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="merchant_id" property="merchantId" jdbcType="BIGINT" />
+    <result column="merchant_level" property="merchantLevel" jdbcType="TINYINT" />
+    <result column="down_merchant_id" property="downMerchantId" jdbcType="BIGINT" />
+    <result column="down_merchant_level" property="downMerchantLevel" jdbcType="TINYINT" />
+    <result column="order_number" property="orderNumber" jdbcType="CHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="REAL" />
+    <result column="proportion" property="proportion" jdbcType="REAL" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="rebate_money" property="rebateMoney" jdbcType="REAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, merchant_id, merchant_level, down_merchant_id, down_merchant_level, order_number, 
+    total_price, proportion, money, create_date_time, remark, rebate_money, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_merchant_rebate_money_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryListByMerchantId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select 
+    <include refid="Base_Column_List" />
+    from tbl_merchant_rebate_money_record
+    where merchant_id = #{merchantId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_merchant_rebate_money_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.MerchantRebateMoneyRecord" >
+    insert into tbl_merchant_rebate_money_record (id, merchant_id, merchant_level, 
+      down_merchant_id, down_merchant_level, order_number, 
+      total_price, proportion, money, 
+      create_date_time, remark, rebate_money, 
+      status)
+    values (#{id,jdbcType=BIGINT}, #{merchantId,jdbcType=BIGINT}, #{merchantLevel,jdbcType=TINYINT}, 
+      #{downMerchantId,jdbcType=BIGINT}, #{downMerchantLevel,jdbcType=TINYINT}, #{orderNumber,jdbcType=CHAR}, 
+      #{totalPrice,jdbcType=REAL}, #{proportion,jdbcType=REAL}, #{money,jdbcType=REAL}, 
+      #{createDateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{rebateMoney,jdbcType=REAL}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.MerchantRebateMoneyRecord" >
+    insert into tbl_merchant_rebate_money_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="merchantId != null" >
+        merchant_id,
+      </if>
+      <if test="merchantLevel != null" >
+        merchant_level,
+      </if>
+      <if test="downMerchantId != null" >
+        down_merchant_id,
+      </if>
+      <if test="downMerchantLevel != null" >
+        down_merchant_level,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="rebateMoney != null" >
+        rebate_money,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantLevel != null" >
+        #{merchantLevel,jdbcType=TINYINT},
+      </if>
+      <if test="downMerchantId != null" >
+        #{downMerchantId,jdbcType=BIGINT},
+      </if>
+      <if test="downMerchantLevel != null" >
+        #{downMerchantLevel,jdbcType=TINYINT},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=CHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=REAL},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=REAL},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="rebateMoney != null" >
+        #{rebateMoney,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.MerchantRebateMoneyRecord" >
+    update tbl_merchant_rebate_money_record
+    <set >
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantLevel != null" >
+        merchant_level = #{merchantLevel,jdbcType=TINYINT},
+      </if>
+      <if test="downMerchantId != null" >
+        down_merchant_id = #{downMerchantId,jdbcType=BIGINT},
+      </if>
+      <if test="downMerchantLevel != null" >
+        down_merchant_level = #{downMerchantLevel,jdbcType=TINYINT},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=CHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=REAL},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=REAL},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="rebateMoney != null" >
+        rebate_money = #{rebateMoney,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.MerchantRebateMoneyRecord" >
+    update tbl_merchant_rebate_money_record
+    set merchant_id = #{merchantId,jdbcType=BIGINT},
+      merchant_level = #{merchantLevel,jdbcType=TINYINT},
+      down_merchant_id = #{downMerchantId,jdbcType=BIGINT},
+      down_merchant_level = #{downMerchantLevel,jdbcType=TINYINT},
+      order_number = #{orderNumber,jdbcType=CHAR},
+      total_price = #{totalPrice,jdbcType=REAL},
+      proportion = #{proportion,jdbcType=REAL},
+      money = #{money,jdbcType=REAL},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      rebate_money = #{rebateMoney,jdbcType=REAL},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

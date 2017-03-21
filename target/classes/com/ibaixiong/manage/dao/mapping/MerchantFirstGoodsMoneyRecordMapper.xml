@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ibaixiong.manage.dao.crm.MerchantFirstGoodsMoneyRecordDao" >
+  <resultMap id="BaseResultMap" type="com.ibaixiong.entity.MerchantFirstGoodsMoneyRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="merchant_id" property="merchantId" jdbcType="BIGINT" />
+    <result column="merchant_level" property="merchantLevel" jdbcType="TINYINT" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="order_number" property="orderNumber" jdbcType="CHAR" />
+    <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="first_goods_money_balance_before" property="firstGoodsMoneyBalanceBefore" jdbcType="REAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="first_goods_money_balance_after" property="firstGoodsMoneyBalanceAfter" jdbcType="REAL" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, merchant_id, merchant_level, admin_id, order_number, create_date_time, money,remark,
+    first_goods_money_balance_before,status,first_goods_money_balance_after,type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_merchant_first_goods_money_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="queryListByMerchantId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_merchant_first_goods_money_record
+    where merchant_id = #{merchantId,jdbcType=BIGINT} and type in (0,1,2)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_merchant_first_goods_money_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ibaixiong.entity.MerchantFirstGoodsMoneyRecord" >
+    insert into tbl_merchant_first_goods_money_record (id, merchant_id, merchant_level, admin_id, order_number,
+      create_date_time, money,remark,first_goods_money_balance_before,status,first_goods_money_balance_after,type)
+    values (#{id,jdbcType=BIGINT}, #{merchantId,jdbcType=BIGINT}, #{merchantLevel,jdbcType=TINYINT}, #{adminId,jdbcType=BIGINT}, 
+      #{orderNumber,jdbcType=VARCHAR}, #{createDateTime,jdbcType=TIMESTAMP}, #{money,jdbcType=REAL},#{remark,jdbcType=VARCHAR},
+      #{firstGoodsMoneyBalanceBefore,jdbcType=REAL},#{status,jdbcType=TINYINT},#{firstGoodsMoneyBalanceAfter,jdbcType=REAL},
+      #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ibaixiong.entity.MerchantFirstGoodsMoneyRecord" >
+    insert into tbl_merchant_first_goods_money_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="merchantId != null" >
+        merchant_id,
+      </if>
+      <if test="merchantLevel != null" >
+        merchant_level,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+       <if test="remark != null" >
+        remark,
+      </if>
+      <if test="firstGoodsMoneyBalanceBefore != null" >
+        first_goods_money_balance_before,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="firstGoodsMoneyBalanceAfter != null" >
+        first_goods_money_balance_after,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantLevel != null" >
+        #{merchantLevel,jdbcType=TINYINT},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="firstGoodsMoneyBalanceBefore != null" >
+        #{firstGoodsMoneyBalanceBefore,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="firstGoodsMoneyBalanceAfter != null" >
+        #{firstGoodsMoneyBalanceAfter,jdbcType=REAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ibaixiong.entity.MerchantFirstGoodsMoneyRecord" >
+    update tbl_merchant_first_goods_money_record
+    <set >
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantLevel != null" >
+        merchant_level = #{merchantLevel,jdbcType=TINYINT},
+      </if>
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDateTime != null" >
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+       <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="firstGoodsMoneyBalanceBefore != null" >
+        first_goods_money_balance_before = #{firstGoodsMoneyBalanceBefore,jdbcType=REAL},
+      </if>
+       <if test="status != null" >
+        status=#{status,jdbcType=TINYINT},
+      </if>
+       <if test="firstGoodsMoneyBalanceAfter != null" >
+        first_goods_money_balance_After=#{firstGoodsMoneyBalanceAfter,jdbcType=REAL},
+      </if>
+       <if test="type != null" >
+        type=#{type,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ibaixiong.entity.MerchantFirstGoodsMoneyRecord" >
+    update tbl_merchant_first_goods_money_record
+    set merchant_id = #{merchantId,jdbcType=BIGINT},
+    merchant_level = #{merchantLevel,jdbcType=TINYINT},
+      admin_id = #{adminId,jdbcType=BIGINT},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=REAL},
+      remark = #{remark,jdbcType=VARCHAR},
+     first_goods_money_balance_before = #{firstGoodsMoneyBalanceBefore,jdbcType=REAL},
+     status = #{status,jdbcType=TINYINT},
+     first_goods_money_balance_After=#{firstGoodsMoneyBalanceAfter,jdbcType=REAL},
+     type=#{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

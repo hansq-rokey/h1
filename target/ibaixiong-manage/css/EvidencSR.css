@@ -1,0 +1,67 @@
+/************    物证入库   ***********/
+#conditionButton{
+    text-align: right;
+    margin-top: -28px;
+}
+
+.tab_list{
+    width: 98%;
+    margin-left: 1%;
+    border: 1px solid #0495ce;
+    border-collapse:collapse;
+}
+.tab_list td{
+    border: 1px solid #b4cede;
+
+}
+.tr_bg{
+    background: url(../images/EvidenceSR/EvidenceSR_26.gif);
+    background-repeat: repeat-x;
+    height: 29px;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+}
+.tr_bg1{
+    background-color: #e2eaff;
+    height: 28px;
+    border-bottom: 1px solid #b4cede;
+}
+.tr_bg2{
+    background-color: #c5dbe9;
+    height: 28px;
+
+}
+.tab_delebutton{
+    width: 98%;
+    margin-left: 1%;
+    margin-top:5px;
+    text-align: left;
+}
+.tab_lsit_page{
+    width: 98%;
+    margin-left: 1%;
+    text-align: center;
+    height: 28px;
+    vertical-align: middle;
+    padding-top: 10px;
+}
+.td_list1{
+    width: 3%;
+}
+.td_list2{
+    width: 7%;
+}
+.td_list3{
+    width: 25%;
+}
+.td_list4{
+    width: 20%;
+}
+.tab_lsit_footer{
+    width: 100%;
+    margin-left: 1%;
+    margin-top: 5px;
+    text-align: left;
+}
+
